@@ -2,7 +2,7 @@
 
 This document contains information about how to run a PHONEMeS analysis based on the scripts and data files provided in the [PHONEMeS Main Example folder](https://github.com/saezlab/PHONEMeS/tree/master/Example/Example_MainData).
 
-The documentation is based on PHONEMeS 0.2.3, run locally using R 3.1.0 (in RStudio) and on a cluster using R 2.15.2 and LSF 8. Running these scripts requires the *igraph* package (version 0.7.1) and the BioNet package (version 1.24.0). The networks are visualized in Cytoscape 2.8.0 (although we are working on a plugin for Cytoscape 3 to automatically import the contents of a typical PHONEMeS results folder and to produce annotated networks).
+The documentation is based on PHONEMeS 0.2.3, run locally using R 3.1.0 (in RStudio) and on a cluster using R 2.15.2 and LSF 8. Running these scripts requires the *igraph* package (version 0.7.1) and the *BioNet* package (version 1.24.0). The networks are visualized in *Cytoscape* 2.8.0 (although we are working on a plugin for Cytoscape 3 to automatically import the contents of a typical PHONEMeS results folder and to produce annotated networks).
 
 ## PHONEMeS workflow
 
@@ -49,17 +49,22 @@ Once `postOptim.R` has been run on all independent optimization and produced the
 
 #### 9. Visualize the resulting networks
 The resulting `.txt`-files (either individual ones from **step 7** or combined ones from **step 7**) can be imported as tables into cytoscape.
+
 1. Start Cytoscape and select "From Network File...".
+
 2. Select `nTagMaxIn_comb.txt` and set the columns `K.ID` as source and `S.cc` as target.
+
 3. Import edge frequencies: 
-    * "Import Table from File": Select `combOptim_EA.txt`. 
-    * Select "Import Data as: Edge Table Column" and "Key Column for Network: SID". 
-    * Select the columns `SID` as Key and the column `f50` as Attribute.
+  * "Import Table from File": Select `combOptim_EA.txt`. 
+  * Select "Import Data as: Edge Table Column" and "Key Column for Network: SID". 
+  * Select the columns `SID` as Key and the column `f50` as Attribute.
+
 4. Import Nodes Attributes:
-    * "Import Table from File": Select `AllNodes_nodesP_NA_pn.txt`. 
-    * Select "Import Data as: Node Table Column".
-    * Advanced Options: De-select "Use first line as columns names"
-    * Name the second column 'nodesP'
+  * "Import Table from File": Select `AllNodes_nodesP_NA_pn.txt`. 
+  * Select "Import Data as: Node Table Column".
+  * Advanced Options: De-select "Use first line as columns names"
+  * Name the second column 'nodesP'
+
 5. Import visual properties:
-   * "Import Styles": Select `PHONEMeS_vizmap.props` in the PHONEMeS repository ([here](https://github.com/saezlab/PHONEMeS/tree/master/Example)).
-   * Finally, select the PHONEMeS style in the "Style" tab.
+  * "Import Styles": Select `PHONEMeS_vizmap.props` in the PHONEMeS repository ([here](https://github.com/saezlab/PHONEMeS/tree/master/Example)).
+  * Finally, select the PHONEMeS style in the "Style" tab.
