@@ -1,11 +1,16 @@
 library(igraph)
 library(BioNet)
 library(PHONEMeS)
-setwd("~/Desktop/PHONEMes_data1/MTOR_noNK")
-load("data4cluster_3.RData")
-load("p3_imported.RData")
+
+# Set working directory to directory of this script (in RStudio)
+setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+# If you are using this file as Source, use:
+# setwd(getSrcDirectory()[1])
+
+load("../cluster_scripts/data4cluster_3.RData")
+load("../cluster_results/p3_imported.RData")
 #This is the folder where all the results will be written
-resFolder<-"~/Desktop/PHONEMeS_data1/MTOR_noNK/"
+resFolder<-"../cluster_results/"
 #These are used to produce the node attribute files and to produce the networks
 nodesOnOff<-nodesData(data.On=data.P, dataGMM=dataGMM, pknList=pknList)
 #####################
@@ -58,10 +63,10 @@ intgNone.3<-opres$intgNone
 save(file=paste(resFolder,"objects_p3.RData", sep=""),
      list=c("intgAnd.3", "intgNone.3","G1.AndBinF.3","G1.flipP.3","FE.3","Msize.3","BMGsize.3","BM.s.3","sM.3","sM.avg.3","sAll.3","G1.freq.3", "G1.NoneBinF.3"))
 ######################
-rm(list=ls())
-load("p4_imported.RData")
-#This is the folder where all the results will be written
-resFolder<-"~/Desktop/PHONEMeS_data1/MTOR_noNK/"
+rm(list=setdiff(ls(), "resFolder"))
+
+load("../cluster_results/p4_imported.RData")
+
 #this write in a data file the objects that are needed when multiple independent
 #optimisations are performed - ignore if only one optimisation is done
 FE.4<-opres$FE
@@ -80,10 +85,10 @@ intgNone.4<-opres$intgNone
 save(file=paste(resFolder,"objects_p4.RData", sep=""),
      list=c("intgAnd.4", "intgNone.4","G1.AndBinF.4","G1.flipP.4","FE.4","Msize.4","BMGsize.4","BM.s.4","sM.4","sM.avg.4","sAll.4","G1.freq.4", "G1.NoneBinF.4"))
 ######################
-rm(list=ls())
-load("p5_imported.RData")
-#This is the folder where all the results will be written
-resFolder<-"~/Desktop/PHONEMeS_data1/MTOR_noNK/"
+rm(list=setdiff(ls(), "resFolder"))
+
+load("../cluster_results/p5_imported.RData")
+
 #this write in a data file the objects that are needed when multiple independent
 #optimisations are performed - ignore if only one optimisation is done
 FE.5<-opres$FE
@@ -102,10 +107,10 @@ intgNone.5<-opres$intgNone
 save(file=paste(resFolder,"objects_p5.RData", sep=""),
      list=c("intgAnd.5", "intgNone.5","G1.AndBinF.5","G1.flipP.5","FE.5","Msize.5","BMGsize.5","BM.s.5","sM.5","sM.avg.5","sAll.5","G1.freq.5", "G1.NoneBinF.5"))
 ######################
-rm(list=ls())
-load("p6_imported.RData")
-#This is the folder where all the results will be written
-resFolder<-"~/Desktop/PHONEMeS_data1/MTOR_noNK/"
+rm(list=setdiff(ls(), "resFolder"))
+
+load("../cluster_results/p6_imported.RData")
+
 #this write in a data file the objects that are needed when multiple independent
 #optimisations are performed - ignore if only one optimisation is done
 FE.6<-opres$FE
@@ -124,10 +129,10 @@ intgNone.6<-opres$intgNone
 save(file=paste(resFolder,"objects_p6.RData", sep=""),
      list=c("intgAnd.6", "intgNone.6","G1.AndBinF.6","G1.flipP.6","FE.6","Msize.6","BMGsize.6","BM.s.6","sM.6","sM.avg.6","sAll.6","G1.freq.6", "G1.NoneBinF.6"))
 ######################
-rm(list=ls())
-load("p7_imported.RData")
-#This is the folder where all the results will be written
-resFolder<-"~/Desktop/PHONEMeS_data1/MTOR_noNK/"
+rm(list=setdiff(ls(), "resFolder"))
+
+load("../cluster_results/p7_imported.RData")
+
 #this write in a data file the objects that are needed when multiple independent
 #optimisations are performed - ignore if only one optimisation is done
 FE.7<-opres$FE
@@ -146,10 +151,10 @@ intgNone.7<-opres$intgNone
 save(file=paste(resFolder,"objects_p7.RData", sep=""),
      list=c("intgAnd.7", "intgNone.7","G1.AndBinF.7","G1.flipP.7","FE.7","Msize.7","BMGsize.7","BM.s.7","sM.7","sM.avg.7","sAll.7","G1.freq.7", "G1.NoneBinF.7"))
 ######################
-rm(list=ls())
-load("p8_imported.RData")
-#This is the folder where all the results will be written
-resFolder<-"~/Desktop/PHONEMeS_data1/MTOR_noNK/"
+rm(list=setdiff(ls(), "resFolder"))
+
+load("../cluster_results/p8_imported.RData")
+
 #this write in a data file the objects that are needed when multiple independent
 #optimisations are performed - ignore if only one optimisation is done
 FE.8<-opres$FE

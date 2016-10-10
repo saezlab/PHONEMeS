@@ -1,10 +1,18 @@
-resFolder<-"~/Desktop/PHONEMeS_data1/MTOR_noNK/"
-load(paste(resFolder,"objects_p3.RData", sep=""))
-load(paste(resFolder,"objects_p4.RData", sep=""))
-load(paste(resFolder,"objects_p5.RData", sep=""))
-load(paste(resFolder,"objects_p6.RData", sep=""))
-load(paste(resFolder,"objects_p7.RData", sep=""))
-load(paste(resFolder,"objects_p8.RData", sep=""))
+
+# Set working directory to directory of this script (in RStudio)
+setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+# If you are using this file as Source, use:
+# setwd(getSrcDirectory()[1])
+
+resFolder = '../result_network/'
+
+load("../cluster_results/objects_p3.RData")
+load("../cluster_results/objects_p4.RData")
+load("../cluster_results/objects_p5.RData")
+load("../cluster_results/objects_p6.RData")
+load("../cluster_results/objects_p7.RData")
+load("../cluster_results/objects_p8.RData")
+
 library(PHONEMeS)
 library(BioNet)
 library(igraph)
@@ -102,7 +110,7 @@ dev.off()
 ####produce the combined networks
 #these produce, for each edge, the averaged (across independent optimisations) final 
 #bin numbers and frequency in the population
-load(paste(resFolder,"data4cluster_3.RData", sep=""))
+load("../cluster_scripts/data4cluster_3.RData")
 G1.avg<-rowMeans(cbind(G1.freq.3[,fGen], 
 	G1.freq.4[,fGen],
 	G1.freq.5[,fGen], 
