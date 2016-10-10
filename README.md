@@ -6,7 +6,7 @@ This repository contains the [R package](https://github.com/saezlab/PHONEMeS/tre
 
 ### License
 
-Distributed under the GNU GPLv2 License. See accompanying file LICENSE.txt or copy at https://www.gnu.org/licenses/gpl-2.0.html.
+Distributed under the GNU GPLv2 License. See accompanying file [LICENSE.txt](https://github.com/saezlab/PHONEMeS/blob/master/LICENSE.txt) or copy at https://www.gnu.org/licenses/gpl-2.0.html.
 
 ### Installation
 
