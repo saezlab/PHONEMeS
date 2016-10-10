@@ -1,0 +1,11 @@
+Package: PHONEMeS
+Type: Package
+Title: Building discovery high-content phosphoproteomics-based models
+Version: 0.2.6
+Date: 2015-02-14
+Author: C.D.A. Terfve
+Maintainer: C.D.A. Terfve <terfve@ebi.ac.uk>
+Description: This package implements the method in Terfve et al. (submitted) to build logic-based models of signalling networks based on mass spectrometry phosphoproteomics data and kinase/phosphatase-substrate relationships.
+License: GPL-2
+LazyLoad: yes
+Packaged: 2015-02-27 18:26:35 UTC; camilleterfve
