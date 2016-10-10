@@ -19,10 +19,10 @@ dataBycond <-function(
         DM[i,]<-dl[[i]]
       }
       rownames(DM)<-names(dl)
-      if(any(DM[,1] == Inf)){
+      if(any(DM[,1] == Inf, na.rm=T)){
         DM[which(DM[,1] == Inf),1]<-max(as.numeric(DM[-which(DM[,1] == Inf),1]), na.rm=TRUE)
       }
-      if(any(DM[,1] == -Inf)){
+      if(any(DM[,1] == -Inf, na.rm=T)){
         DM[which(DM[,1] == -Inf),1]<-min(as.numeric(DM[-which(DM[,1] == -Inf),1]), na.rm=TRUE)
       }
       DM<-DM[(rownames(DM) %in% dataReachable),]

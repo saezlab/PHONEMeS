@@ -91,8 +91,8 @@ run1model<-function(pknList=pknList,
       #based on the data from dataOn[tOn]
       score<-0  
       for(dt in 1:length(dataOn[[tOn]])){
-        score.dt<-sum(as.numeric(dataOn[[tOn]][[dt]][as.character(IDmap(dataGMM)[IDmap(dataGMM)[,"S.cc"] %in% rownames(nodes.t[which(nodes.t[,2] == 1),]), "dataID"]),1]), na.rm=TRUE)
-        hits<-rownames(dataOn[[tOn]][[dt]])[intersect(which(dataOn[[tOn]][[dt]][,2] == "P"), which(dataOn[[tOn]][[dt]][,4] == "OK"))]
+        score.dt <- sum(as.numeric(dataOn[[tOn]][[dt]][intersect(row.names(dataOn[[tOn]][[dt]]), as.character(IDmap(dataGMM)[IDmap(dataGMM)[, "S.cc"] %in% rownames(nodes.t[which(nodes.t[, 2] == 1), ]), "dataID"])), 1]), na.rm = TRUE)
+        hits <- rownames(dataOn[[tOn]][[dt]])[intersect(which(dataOn[[tOn]][[dt]][, 2] == "P"), which(dataOn[[tOn]][[dt]][, 4] == "OK"))]
         dataMhits<-rownames(dataOn[[tOn]][[dt]])[which(rownames(dataOn[[tOn]][[dt]]) %in% as.character(IDmap(dataGMM)[as.character(IDmap(dataGMM)[,"S.cc"]) %in% rownames(nodes.t[which(nodes.t[,2] == 1),]), "dataID"]))]
         hits<-hits[!(hits %in% dataMhits)] 
         score.dt<-score.dt+sum(as.numeric(dataOn[[tOn]][[dt]][hits,1])*-1, na.rm=TRUE)
