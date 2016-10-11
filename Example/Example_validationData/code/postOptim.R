@@ -10,7 +10,7 @@ setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 load("../cluster_scripts/data4cluster_3.RData")
 load("../cluster_results/p3_imported.RData")
 #This is the folder where all the results will be written
-resFolder<-"../cluster_results/"
+resFolder<-"../result_network/"
 #These are used to produce the node attribute files and to produce the networks
 nodesOnOff<-nodesData(data.On=data.P, dataGMM=dataGMM, pknList=pknList)
 #####################

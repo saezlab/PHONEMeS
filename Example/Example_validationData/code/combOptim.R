@@ -6,12 +6,12 @@ setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 
 resFolder = '../result_network/'
 
-load("../cluster_results/objects_p3.RData")
-load("../cluster_results/objects_p4.RData")
-load("../cluster_results/objects_p5.RData")
-load("../cluster_results/objects_p6.RData")
-load("../cluster_results/objects_p7.RData")
-load("../cluster_results/objects_p8.RData")
+load(paste0(resFolder, "objects_p3.RData"))
+load(paste0(resFolder, "objects_p4.RData"))
+load(paste0(resFolder, "objects_p5.RData"))
+load(paste0(resFolder, "objects_p6.RData"))
+load(paste0(resFolder, "objects_p7.RData"))
+load(paste0(resFolder, "objects_p8.RData"))
 
 library(PHONEMeS)
 library(BioNet)
