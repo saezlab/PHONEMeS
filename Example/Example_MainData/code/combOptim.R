@@ -1,4 +1,9 @@
-resFolder<-"~/Desktop/Res"
+# Set working directory to directory of this script (in RStudio)
+setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+# If you are using this file as Source, use:
+# setwd(getSrcDirectory()[1])
+
+resFolder<-"../result_network/"
 load(paste(resFolder,"objects_p3.RData", sep=""))
 load(paste(resFolder,"objects_p4.RData", sep=""))
 load(paste(resFolder,"objects_p5.RData", sep=""))

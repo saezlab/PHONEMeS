@@ -2,6 +2,12 @@
 library(BioNet)
 library(igraph)
 library(PHONEMeS)
+
+# Set working directory to directory of this script (in RStudio)
+setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+# If you are using this file as Source, use:
+# setwd(getSrcDirectory()[1])
+
 #Load the network data and GMM results
 load("../data/allD_noCSK_filt.RData")
 load("../data/dataObjects_PHONEMeS.RData")
