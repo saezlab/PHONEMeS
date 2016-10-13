@@ -4,7 +4,7 @@ library(igraph)
 library(BioNet)
 library(PHONEMeS)
 #check that the previous generation has been processed
-load("data4cluster_18.RData")
+load(paste0("data4cluster_", commandArgs(trailingOnly=TRUE)[1],".RData"))
 if(Gindex != 1){
   genResults<-paste("Results_",resN(optParam),"/G",(Gindex-1),"output.RData", sep="")  
   load(file=genResults)

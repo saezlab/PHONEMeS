@@ -1,7 +1,0 @@
-library(igraph)
-library(BioNet)
-library(PHONEMeS)
-load("data4cluster_20.RData")
-opres<-oRes(data.On=data.P, optParam=optParam, pknList=pknList)
-plotoRes(opres=opres,optParam=optParam, data.On=data.P)
-save.image(paste("p",resN(optParam),"_imported.RData", sep=""))

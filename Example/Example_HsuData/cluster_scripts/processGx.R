@@ -2,7 +2,7 @@ Gindex<-as.numeric(commandArgs(trailingOnly=TRUE)[2])
 library(igraph)
 library(BioNet)
 library(PHONEMeS)
-load("data4cluster_15.RData")
+load(paste0("data4cluster_", commandArgs(trailingOnly=TRUE)[1],".RData"))
 if(Gindex != 1){
   genResults<-paste("Results_",resN(optParam),"/G",(Gindex-1),"output.RData", sep="")
 }	
