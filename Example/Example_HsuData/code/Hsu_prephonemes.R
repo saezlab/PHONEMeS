@@ -1,12 +1,16 @@
-#Do one with rapa only
-setwd("~/Desktop/CamMS_draft/Hsu2011")
+
+# Set working directory to directory of this script (in RStudio)
+setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+# If you are using this file as Source, use:
+# setwd(getSrcDirectory()[1])
+
 #load the packages
 library(BioNet)
 library(igraph)
 library(PHONEMeS)
 #Load the network data and GMM results
-load(file="data_Hsu_PHONEMeS_Feb13.RData")
-load("~/Desktop/PHONEMeS_all/PHONEMeS_example/allD_noCSK_filt.RData")
+load(file="../data/data_Hsu_PHONEMeS_Feb13.RData")
+load("../../Example_MainData/data/allD_noCSK_filt.RData")
 #Make the data objects that will be needed
 bg<-new("KPSbg", interactions=allD, species=unique(c(allD$K.ID, allD$S.cc)))
 dataGMM<-new("GMMres", res=GMM, IDmap=GMM.ID, resFC=GMM.wFC)
@@ -49,38 +53,37 @@ show(pknList)
 #set the parameters for optimisation
 optParam<-new("OptParam", sizeP=0, nG1=100, cstart=TRUE, intgAsintm=FALSE,
               nScripts=50, absTol=FALSE, tol=0.15, cap=20, resN=9, nG=50)
-save(file=paste("Cluster/rapa/data4cluster_",resN(optParam),".RData", sep=""), 
+save(file=paste("../cluster_scripts/rapa/data4cluster_",resN(optParam),".RData", sep=""), 
      list=c("pknList","data.P", "targets.P", "optParam", "dataGMM"))
 optParam<-new("OptParam", sizeP=0, nG1=100, cstart=TRUE, intgAsintm=FALSE,
               nScripts=50, absTol=FALSE, tol=0.15, cap=20, resN=10, nG=50)
-save(file=paste("Cluster/rapa/data4cluster_",resN(optParam),".RData", sep=""), 
+save(file=paste("../cluster_scripts/rapa/data4cluster_",resN(optParam),".RData", sep=""), 
      list=c("pknList","data.P", "targets.P", "optParam", "dataGMM"))
 optParam<-new("OptParam", sizeP=0, nG1=100, cstart=TRUE, intgAsintm=FALSE,
               nScripts=50, absTol=FALSE, tol=0.15, cap=20, resN=11, nG=50)
-save(file=paste("Cluster/rapa/data4cluster_",resN(optParam),".RData", sep=""), 
+save(file=paste("../cluster_scripts/rapa/data4cluster_",resN(optParam),".RData", sep=""), 
      list=c("pknList","data.P", "targets.P", "optParam", "dataGMM"))
 optParam<-new("OptParam", sizeP=0, nG1=100, cstart=TRUE, intgAsintm=FALSE,
               nScripts=50, absTol=FALSE, tol=0.15, cap=20, resN=12, nG=50)
-save(file=paste("Cluster/rapa/data4cluster_",resN(optParam),".RData", sep=""), 
+save(file=paste("../cluster_scripts/rapa/data4cluster_",resN(optParam),".RData", sep=""), 
      list=c("pknList","data.P", "targets.P", "optParam", "dataGMM"))
 optParam<-new("OptParam", sizeP=0, nG1=100, cstart=TRUE, intgAsintm=FALSE,
               nScripts=50, absTol=FALSE, tol=0.15, cap=20, resN=13, nG=50)
-save(file=paste("Cluster/rapa/data4cluster_",resN(optParam),".RData", sep=""), 
+save(file=paste("../cluster_scripts/rapa/data4cluster_",resN(optParam),".RData", sep=""), 
      list=c("pknList","data.P", "targets.P", "optParam", "dataGMM"))
 optParam<-new("OptParam", sizeP=0, nG1=100, cstart=TRUE, intgAsintm=FALSE,
               nScripts=50, absTol=FALSE, tol=0.15, cap=20, resN=14, nG=50)
-save(file=paste("Cluster/rapa/data4cluster_",resN(optParam),".RData", sep=""), 
+save(file=paste("../cluster_scripts/rapa/data4cluster_",resN(optParam),".RData", sep=""), 
      list=c("pknList","data.P", "targets.P", "optParam", "dataGMM"))
 #############################################
 #Torin
-setwd("~/Desktop/CamMS_draft/Hsu2011")
 #load the packages
 library(BioNet)
 library(igraph)
 library(PHONEMeS)
 #Load the network data and GMM results
-load(file="data_Hsu_PHONEMeS_Feb13.RData")
-load("~/Desktop/PHONEMeS_all/PHONEMeS_example/allD_noCSK_filt.RData")
+load(file="../data/data_Hsu_PHONEMeS_Feb13.RData")
+load("../../Example_MainData/data/allD_noCSK_filt.RData")
 #Make the data objects that will be needed
 bg<-new("KPSbg", interactions=allD, species=unique(c(allD$K.ID, allD$S.cc)))
 dataGMM<-new("GMMres", res=GMM, IDmap=GMM.ID, resFC=GMM.wFC)
@@ -124,26 +127,26 @@ show(pknList)
 #set the parameters for optimisation
 optParam<-new("OptParam", sizeP=0, nG1=100, cstart=TRUE, intgAsintm=FALSE,
               nScripts=50, absTol=FALSE, tol=0.15, cap=20, resN=5, nG=50)
-save(file=paste("Cluster/torin/data4cluster_",resN(optParam),".RData", sep=""), 
+save(file=paste("../cluster_scripts/torin/data4cluster_",resN(optParam),".RData", sep=""), 
      list=c("pknList","data.P", "targets.P", "optParam", "dataGMM"))
 optParam<-new("OptParam", sizeP=0, nG1=100, cstart=TRUE, intgAsintm=FALSE,
               nScripts=50, absTol=FALSE, tol=0.15, cap=20, resN=6, nG=50)
-save(file=paste("Cluster/torin/data4cluster_",resN(optParam),".RData", sep=""), 
+save(file=paste("../cluster_scripts/torin/data4cluster_",resN(optParam),".RData", sep=""), 
      list=c("pknList","data.P", "targets.P", "optParam", "dataGMM"))
 optParam<-new("OptParam", sizeP=0, nG1=100, cstart=TRUE, intgAsintm=FALSE,
               nScripts=50, absTol=FALSE, tol=0.15, cap=20, resN=7, nG=50)
-save(file=paste("Cluster/torin/data4cluster_",resN(optParam),".RData", sep=""), 
+save(file=paste("../cluster_scripts/torin/data4cluster_",resN(optParam),".RData", sep=""), 
      list=c("pknList","data.P", "targets.P", "optParam", "dataGMM"))
 optParam<-new("OptParam", sizeP=0, nG1=100, cstart=TRUE, intgAsintm=FALSE,
               nScripts=50, absTol=FALSE, tol=0.15, cap=20, resN=8, nG=50)
-save(file=paste("Cluster/torin/data4cluster_",resN(optParam),".RData", sep=""), 
+save(file=paste("../cluster_scripts/torin/data4cluster_",resN(optParam),".RData", sep=""), 
      list=c("pknList","data.P", "targets.P", "optParam", "dataGMM"))
 optParam<-new("OptParam", sizeP=0, nG1=100, cstart=TRUE, intgAsintm=FALSE,
               nScripts=50, absTol=FALSE, tol=0.15, cap=20, resN=3, nG=50)
-save(file=paste("Cluster/torin/data4cluster_",resN(optParam),".RData", sep=""), 
+save(file=paste("../cluster_scripts/torin/data4cluster_",resN(optParam),".RData", sep=""), 
      list=c("pknList","data.P", "targets.P", "optParam", "dataGMM"))
 optParam<-new("OptParam", sizeP=0, nG1=100, cstart=TRUE, intgAsintm=FALSE,
               nScripts=50, absTol=FALSE, tol=0.15, cap=20, resN=4, nG=50)
-save(file=paste("Cluster/torin/data4cluster_",resN(optParam),".RData", sep=""), 
+save(file=paste("../cluster_scripts/torin/data4cluster_",resN(optParam),".RData", sep=""), 
      list=c("pknList","data.P", "targets.P", "optParam", "dataGMM"))
 

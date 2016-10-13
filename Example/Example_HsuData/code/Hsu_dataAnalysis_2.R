@@ -1,7 +1,13 @@
-data<-read.table("1199498s_TableS2.txt", sep="\t", header=TRUE)
+
+# Set working directory to directory of this script (in RStudio)
+setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+# If you are using this file as Source, use:
+# setwd(getSrcDirectory()[1])
+
+data<-read.table("../data/1199498s_TableS2.txt", sep="\t", header=TRUE)
 dataIDs<-as.character(data$refseq_id)
 data.sites<-as.character(data$abs_phosphosites)
-data.IDmap<-read.csv("uniprot-yourlist%3AM201501042EL1V9A9QJ-2.csv", header=TRUE,
+data.IDmap<-read.csv("../data/uniprot-yourlist%3AM201501042EL1V9A9QJ-2.csv", header=TRUE,
                      fill=TRUE)
 data.IDtable<-cbind(
   as.character(data.IDmap$yourlist.M201501042EL1V9A9QJ[data.IDmap$Status == "reviewed"]), 
@@ -176,6 +182,17 @@ for(i in 1:length(GMM.wFC)){
 GMM.wFC<-GMM.wFC[GMM.ID.2[!is.na(GMM.ID.2[,2]),1]]
 #
 rm(GMM.ID.2)
+
+# EDIT BY JAKOB: CREATE GMM.ID, SINCE IT IS MISSING IN THE CODE SO FAR
+# BEWARE: PROBABLY NOT THE SAME TABLE AS CAMILLE ORIGINALLY USED
+GMM.ID = cbind(as.character(tor_ins_log2[,"Scc"]),
+               as.character(data.IDtable[match(tor_ins_log2[,"refseq_id"], as.character(data.IDtable[,1])),2]),
+               lapply(as.character(tor_ins_log2[,"abs_phosphosites"]), FUN=function(x){gsub(';.*$', '', x)}),
+               lapply(lapply(as.character(tor_ins_log2[,"abs_phosphosites"]), FUN=function(x){gsub(';.*$', '', x)}), FUN=function(x){substr(x, 2, 11)}),
+               lapply(lapply(as.character(tor_ins_log2[,"abs_phosphosites"]), FUN=function(x){gsub(';.*$', '', x)}), FUN=function(x){substr(x, 1, 1)})
+)
+GMM.ID = cbind(GMM.ID, sapply(c(1:dim(GMM.ID)[1]), FUN=function(x){paste(GMM.ID[x,2], GMM.ID[x,5], GMM.ID[x,4], sep='.')}))
+
 GMM.ID<-data.frame(dataID=as.character(GMM.ID[,1]), 
                    UPID=as.character(GMM.ID[,2]),
                    site=as.character(GMM.ID[,3]),
