@@ -2,7 +2,7 @@
 
 This document contains information about how to run a PHONEMeS analysis based on the scripts and data files provided in the [PHONEMeS Main Example folder](https://github.com/saezlab/PHONEMeS/tree/master/Example/Example_MainData).
 
-The documentation is based on PHONEMeS 0.2.3, run locally using R 3.1.0 (in RStudio) and on a cluster using R 2.15.2 and LSF 8. Running these scripts requires the *igraph* package (version 0.7.1) and the *BioNet* package (version 1.24.0). The networks are visualized in *Cytoscape* 2.8.0 (although we are working on a plugin for Cytoscape 3 to automatically import the contents of a typical PHONEMeS results folder and to produce annotated networks).
+The documentation is based on PHONEMeS 0.2.3, run locally using R 3.1.0 (in RStudio) and on a cluster using R 2.15.2 and LSF 8. Running these scripts requires the *[igraph](http://igraph.org/r/)* package (version 0.7.1) and the *[BioNet](https://www.bioconductor.org/packages/release/bioc/html/BioNet.html)* package (version 1.24.0). The networks are visualized in *[Cytoscape](http://www.cytoscape.org/)* 2.8.0 (although we are working on a plugin for Cytoscape 3 to automatically import the contents of a typical PHONEMeS results folder and to produce annotated networks).
 
 ## PHONEMeS workflow
 
