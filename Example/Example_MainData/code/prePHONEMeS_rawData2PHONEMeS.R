@@ -1,4 +1,12 @@
-load("~/Desktop/PHONEMeS_all/prePHONEMeS/MSdata.RData")
+
+# Set working directory to directory of this script (in RStudio)
+setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+# If you are using this file as Source, use:
+# setwd(getSrcDirectory()[1])
+
+
+
+load("../data/MSdata.RData")
 library(limma)
 ###########Normalise and apply the linear model
 d12.log<-log(d12, base=10)
@@ -329,6 +337,11 @@ table(unlist(lapply(GMM.res, function(x){length(intersect(which(x[,"clus"] == "P
 #this might not be too bad
 #497 sites are perturbed under 1 condition
 ##########IDs
+
+
+# FROM HERE ON, THE CODE DOES NOT EXECUTE WITHOUT ERROR:
+# object 'data2' not found
+
 GMM.res.ID.2<-data.frame(dataID=as.character(data2$psite), UPID=as.character(data2$acc_no))
 GMM.res.ID.2$site<-rep(NA, length(data2$psite))
 DataSite<-as.character(data2$psite)
@@ -355,12 +368,12 @@ GMM.res.ID.2$cc<-paste(GMM.res.ID.2$UPID, GMM.res.ID.2$res, GMM.res.ID.2$pos, se
 length(unique(GMM.res.ID.2$cc))#[1] 11629
 ###
 #this is all that's needed for the PHONEMeS part
-save(list=c("GMM.res", "GMM.res.ID.2"),file="PHONEMeS_example/GMM_noFC.RData")
+save(list=c("GMM.res", "GMM.res.ID.2"),file="../data/GMM_noFC.RData") # This would explain the missing .RData file in the other script
 #this more complete set of objects also has the fold changes
 for(i in 1:length(GMM.res)){
   GMM.res[[i]]<-cbind(GMM.res[[i]], 
                       c(limma.FCvCtrl.d6.NAr[names(GMM.res)[i], match(rownames(GMM.res[[i]]), colnames(limma.FCvCtrl.d6.NAr))]))
   colnames(GMM.res[[i]])[c(1,3,5)]<-c("Indiv", "FCvCaPval", "FCvC")
 }
-save(list=c("GMM.res", "GMM.res.ID.2", "d12", "d12.log.dN", "limma.FCvCtrl.d6.NAr", "limma.FCvCtrl.d6.pval.NAr", "limma.alone.d6.NAr"),file="PHONEMeS_example/dataObjects_2_2.RData")
+save(list=c("GMM.res", "GMM.res.ID.2", "d12", "d12.log.dN", "limma.FCvCtrl.d6.NAr", "limma.FCvCtrl.d6.pval.NAr", "limma.alone.d6.NAr"),file="../data/dataObjects_2_2.RData")
 ####

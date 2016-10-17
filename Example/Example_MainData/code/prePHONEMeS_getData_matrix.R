@@ -1,3 +1,11 @@
+# Set working directory to directory of this script (in RStudio)
+setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+# If you are using this file as Source, use:
+# setwd(getSrcDirectory()[1])
+
+## COMMENT BY JAKOB:
+# Where is this file? - This script does not really make sense without the original .RData file...
+# Anyway, I will adjust the output paths for consistency
 load(file="~/Desktop/Ed-data/data2.RData")
 #
 sum(duplicated(data2$psite))#906
@@ -41,4 +49,4 @@ sum(is.na(data2.noDup$psite)) #1139
 sum(duplicated(data2$psite[!is.na(data2.noDup$psite)]))
 d12<-data2[!is.na(data2.noDup$psite),32:175]
 rownames(d12)<-data2[!is.na(data2.noDup$psite),"psite"]
-save(d12, file="~/Desktop/PHONEMeS_all/prePHONEMeS/MSdata.RData")
+save(d12, file="../data/MSdata.RData")
