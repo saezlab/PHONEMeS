@@ -34,7 +34,7 @@ mInw<-function(nwTable, intgNone, nodesOF, tol, targets.On){
 	#they are perturbed
 	tAnOn<-targets.On
 	for(i in 1:length(targets.On)){
-		tAnOn[[i]]<-list(targets=targets.On[[i]], nodesP=unique(unlist(nodesOnOff$Onlist[[i]])))
+		tAnOn[[i]]<-list(targets=targets.On[[i]], nodesP=unique(unlist(nodesOF$Onlist[[i]])))
 	}
 	tag<-rep(FALSE, dim(nwTable)[1])
 	nM<-max(nwTable$ntag, na.rm=TRUE)
