@@ -62,8 +62,6 @@ The resulting `.txt`-files (either individual ones from **step 7** or combined o
 4. Import Nodes Attributes:
   * "Import Table from File": Select `AllNodes_nodesP_NA_pn.txt`. 
   * Select "Import Data as: Node Table Column".
-  * Advanced Options: De-select "Use first line as columns names"
-  * Name the second column 'nodesP'
 
 5. Import visual properties:
   * "Import Styles": Select `PHONEMeS_vizmap.props` in the PHONEMeS repository ([here](https://github.com/saezlab/PHONEMeS/tree/master/Example)).
