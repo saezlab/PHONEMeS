@@ -14,7 +14,7 @@ Distributed under the GNU GPLv2 License. See accompanying file [LICENSE.txt](htt
 For installation, download the tar file of the package and type in R:
 
 ```R
-install.packages("PHONEMeS_0.2.3.tar.gz", repos=NULL)
+install.packages("PHONEMeS_0.2.7.tar.gz", repos=NULL)
 ```
 
 ### Usage
