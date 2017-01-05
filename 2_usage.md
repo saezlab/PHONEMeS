@@ -45,8 +45,9 @@ This step should be repeated multiple times with different indices. The script `
 
 ## 6. Move results to your local machine
 Copy back the following files back to your local machine in order to process, combine, and visualize the results of the PHONEMeS analysis:
-* pn_imported.RData
-* optim_n.pdf
+
+ * pn_imported.RData
+ * optim_n.pdf
 
 ## 7. Process each independent optimization
 The R script `postOptim.R` will process the results of a single optimization, so that it should be run for each independent optimization run. The file may require minor modifications regarding file location.
@@ -55,7 +56,7 @@ The R script `postOptim.R` will process the results of a single optimization, so
 Once `postOptim.R` has been run on all independent optimization and produced the different files `objects_pn.RData`, run the R script `comb_optim.R`. It will output the combined plots as well as the final resulting network (maximal input averaged frequencies across independent optimizations, maximal scoring paths by averaged frequencies, etc.).
 
 ## 9. Visualize the resulting networks
-The resulting `.txt`-files (either individual ones from [step 7](#7.process_each_independent_optimization) or combined ones from [step 8](#8.combine_multiple_independent_optimizations)) can be imported as tables into cytoscape.
+The resulting `.txt`-files (either individual ones from [step 7](#process-each-independent-optimization) or combined ones from [step 8](#combine-multiple-independent-optimizations)) can be imported as tables into cytoscape.
 
 1. Start Cytoscape and select "From Network File...".
 
