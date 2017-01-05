@@ -17,7 +17,7 @@ tagline:          Phosphorylation Networks for Mass Spectrometry
 description:      "Method to model signaling networks based on untargeted phosphoproteomics data"
 #url:              https://github.com/saezlab/PHONEMeS
 baseurl:          /PHONEMeS/
-toollogo:         tool_logo.png
+toollogo:         public/logo.jpeg
 
 author:
   name:           'Jakob Wirbel'
