@@ -13,13 +13,13 @@ The result networks are visualized using *[Cytoscape](http://www.cytoscape.org/)
 
 # PHONEMeS workflow
 
-## Data Preparation
+# Data Preparation
 
 **TODO**: Include guide for data normalisation, Gaussian mixture modelling, etc.
 
 **TODO_2**: Update this documentation with the new scripts from cluster
 
-## Running PHONEMeS on a Cluster
+# Running PHONEMeS on a Cluster
 
 ### 1. Prepare the data for the cluster
 
@@ -67,7 +67,7 @@ Copy back the following files back to your local machine in order to process, co
  * pn_imported.RData
  * optim_n.pdf
 
-## Post-Optimization Analysis
+# Post-Optimization Analysis
 
 ### Process each independent optimization
 
@@ -77,7 +77,7 @@ The R script `postOptim.R` will process the results of a single optimization, so
 
 Once `postOptim.R` has been run on all independent optimization and produced the different files `objects_pn.RData`, run the R script `comb_optim.R`. It will output the combined plots as well as the final resulting network (maximal input averaged frequencies across independent optimizations, maximal scoring paths by averaged frequencies, etc.).
 
-## Visualize the Result Networks
+# Visualize the Result Networks
 
 The resulting `.txt`-files (either individual ones from [single](#process-each-independent-optimization) or combined [optimizations](#combine-multiple-independent-optimizations)) can be imported as tables into cytoscape.
 
