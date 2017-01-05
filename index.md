@@ -3,7 +3,7 @@ layout: default
 title: Home
 ---
 
-[Logo](https://github.com/saezlab/PHONEMeS/blob/master/website/images/logo.jpg)
+![Logo](https://github.com/saezlab/PHONEMeS/blob/master/website/images/logo.jpg)
 
 # Welcome to the PHONEMeS Documentation Page!
 
