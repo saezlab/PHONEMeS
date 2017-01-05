@@ -12,6 +12,7 @@ kramdown:
 permalink:        pretty
 
 # Setup
+
 title:            PHONEMeS
 tagline:          Phosphorylation Networks for Mass Spectrometry
 description:      "Method to model signaling networks based on untargeted phosphoproteomics data"
