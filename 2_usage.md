@@ -15,27 +15,31 @@ Run `prepOptim.R` and produce `data4cluster_n.RData`. Here, `n` denotes the inde
 
 ## 2. Move to cluster
 Copy the following files to a cluster:
-* data4cluster_n.RData
-* processGx_n.R
-* runScriptGx_n.sh
-* scriptGxopt_50models_n.R
-* import_n.R
+
+ * data4cluster_n.RData
+ * processGx_n.R
+ * runScriptGx_n.sh
+ * scriptGxopt_50models_n.R
+ * import_n.R
 
 ## 3. Install the package
 Make sure that PHONEMeS is installed on your cluster. If this is not the case, run the following in R:
+
 ```R
 install.packages("PHONEMeS_0.2.3.tar.gz", repos=NULL)
 ```
 
 ## 4. Create results directory
 Additionally, each independent optimization run requires a result folder with the index `n` of the optimization run.
-```
+
+```bash
 mkdir Results_n
 ```
 
 ## 5. Run one independent optimization
 This step should be repeated multiple times with different indices. The script `runScriptGx_n.sh` will submit the necessary jobs to the queue of your LSF system. Make sure to modify the script as necessary (e.g. correcting the queue name).
-```
+
+```bash
 ./runScriptGx_n.sh
 ```
 
@@ -51,7 +55,7 @@ The R script `postOptim.R` will process the results of a single optimization, so
 Once `postOptim.R` has been run on all independent optimization and produced the different files `objects_pn.RData`, run the R script `comb_optim.R`. It will output the combined plots as well as the final resulting network (maximal input averaged frequencies across independent optimizations, maximal scoring paths by averaged frequencies, etc.).
 
 ## 9. Visualize the resulting networks
-The resulting `.txt`-files (either individual ones from **step 7** or combined ones from **step 7**) can be imported as tables into cytoscape.
+The resulting `.txt`-files (either individual ones from [step 7](#7.process_each_independent_optimization) or combined ones from [step 8](#8.combine_multiple_independent_optimizations)) can be imported as tables into cytoscape.
 
 1. Start Cytoscape and select "From Network File...".
 
