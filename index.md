@@ -10,6 +10,10 @@ PHONEMeS (**PHO**sphorylation **NE**tworks for **M**ass **S**pectrometry) is a m
 
 This package contains the R package and accompanying scripts that implement the method as well as several examples of how to run a PHONEMeS analysis.
 
+<img src="/PHONEMeS/public/network.png" alt="Example network">
+
+_Example output of PHONEMeS analysis after MTOR inhibition_
+
 # References
 
 + Main reference: [Terfve et al., _Nat Comm_, 2015](http://www.nature.com/articles/ncomms9033)
