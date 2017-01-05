@@ -15,6 +15,10 @@ The result networks are visualized using *[Cytoscape](http://www.cytoscape.org/)
 
 ## Data Preparation
 
+**TODO**: Include guide for data normalisation, Gaussian mixture modelling, etc.
+
+**TODO_2**: Update this documentation with the new scripts from cluster
+
 ## Running PHONEMeS on a Cluster
 
 ### 1. Prepare the data for the cluster
