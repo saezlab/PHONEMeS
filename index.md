@@ -3,7 +3,7 @@ layout: default
 title: Home
 ---
 
-![Logo](public/logo.jpg)
+![Logo](/PHONEMeS/public/logo.jpg)
 
 # Welcome to the PHONEMeS Documentation Page!
 
