@@ -19,7 +19,7 @@ install.packages("PHONEMeS_0.2.7.tar.gz", repos=NULL)
 
 ### Usage
 
-For a guide how to run a PHONEMeS analysis, please refer to the [documentation](https://github.com/saezlab/PHONEMeS/blob/master/Documentation/how_to.md).
+For a guide how to run a PHONEMeS analysis, please refer to the [documentation](https://saezlab.github.io/PHONEMeS).
 
 ### References
 
