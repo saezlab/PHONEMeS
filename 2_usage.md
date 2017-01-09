@@ -15,7 +15,11 @@ The result networks are visualized using *[Cytoscape](http://www.cytoscape.org/)
 
 # I. Data Preparation
 
-**TODO**: Include guide for data normalisation, Gaussian mixture modelling, etc.
+The untargeted phosphoproteomics data used for the identification of the signaling models in PHONEMeS is a data matrix containing the peak heights for each of the measured peptides accross each condition (treatments and control) and replicates and which maps to specific sites over a certain number of proteins. If the data is not normalized, we quantile normalize the *log10* of the raw intensity values and then use a linear model to estimate the effects of each drug over a control state by computing the log fold change between each point of these two conditions and estimating their significance using a *t-statistic* as computed by the function *eBayes* implemented by the *Bioconductor* package *[limma](http://www.bioconductor.org/packages/2.12/bioc/html/limma.html)*
+
+As a second step, we fit a Gaussian Mixture Model (GMM) on each peptide accross each condition and select only those peptides whose distributions are better described with 2 components, hence showing a Boolean behaviour under each different condition (perturbed/non-perturbed). For that we can use the *Bioconductor* package *[mclust](http://www.stat.washington.edu/mclust/)* which runs an expectation-maximization method to fit the measurements into mixed Gaussian distributions. Furthermore, we exclude those cases in which the two density curves overlap by more than *10%* over a range covering the whole data in order to avoid cases where two conditions are found because of a tightly clustered set of measurements. Then for each point, we associate the score ![first equantion](http://latex.codecogs.com/gif.latex?S_%7Bi%2C%20j%7D) as the log ratio of the probabilty of belonging to either a control or perturbed state: ![second equation](http://latex.codecogs.com/gif.latex?S_%7Bi%2C%20j%7D%20%3D%20%5Clog10%28%20%5Cfrac%7B%20P_%7Bi%2C%20j%7D%20%28%20C_%7Bi%7D%20%29%7D%7BP_%7Bi%2C%20j%7D%20%28%20P_%7Bi%7D%20%29%7D%20%29)
+
+Peptide *i* is called perturbed under condition *j* if ![third equation](http://latex.codecogs.com/gif.latex?S_%7Bi%2C%20j%7D%20%3C%20-0.5) and it is considered to be in the control state if ![fourth equation](http://latex.codecogs.com/gif.latex?S_%7Bi%2C%20j%7D%20%3E%200.5). Values in between *-0.5* and *0.5* are considered as undetermined.
 
 **TODO_2**: Update this documentation with the new scripts from cluster
 
