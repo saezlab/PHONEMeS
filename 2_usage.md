@@ -21,7 +21,6 @@ As a second step, we fit a Gaussian Mixture Model (GMM) on each peptide accross 
 
 $$ S_{i,j} = \log 10 (\frac{P_{i,j}(C_i)}{P_{i,j}(P_i)})$$
 
-![second equation](http://latex.codecogs.com/gif.latex?S_%7Bi%2C%20j%7D%20%3D%20%5Clog10%28%20%5Cfrac%7B%20P_%7Bi%2C%20j%7D%20%28%20C_%7Bi%7D%20%29%7D%7BP_%7Bi%2C%20j%7D%20%28%20P_%7Bi%7D%20%29%7D%20%29)
 
 Peptide *i* is called perturbed under condition *j* if this score is below the *-0.5* value, while for values higher than *0.5* the peptide is considered to be in the control state. Values in between *-0.5* and *0.5* are considered as undetermined.
 
