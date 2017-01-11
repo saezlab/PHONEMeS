@@ -45,7 +45,7 @@ Copy the following files to a cluster:
 
 ### 3. Is the package installed?
 
-Make sure that PHONEMeS is installed on your cluster. If this is not the case, refer to the [installation guide](/PHONEMeS/1_installation/).
+Make sure that PHONEMeS is installed on your cluster. If this is not the case, please refer to the [installation guide](/PHONEMeS/1_installation/).
 
 ### 4. Create results directory
 
