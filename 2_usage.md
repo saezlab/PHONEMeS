@@ -45,11 +45,7 @@ Copy the following files to a cluster:
 
 ### 3. Is the package installed?
 
-Make sure that PHONEMeS is installed on your cluster. If this is not the case, run the following in R:
-
-```R
-install.packages("PHONEMeS_0.2.3.tar.gz", repos=NULL)
-```
+Make sure that PHONEMeS is installed on your cluster. If this is not the case, refer to the [installation guide](/PHONEMeS/1_installation/).
 
 ### 4. Create results directory
 
