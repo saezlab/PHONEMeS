@@ -24,7 +24,6 @@ $$ S_{i,j} = \log 10 (\frac{P_{i,j}(C_i)}{P_{i,j}(P_i)})$$
 
 Peptide *i* is called perturbed under condition *j* if this score is below the *-0.5* value, while for values higher than *0.5* the peptide is considered to be in the control state. Values in between *-0.5* and *0.5* are considered as undetermined.
 
-**TODO_2**: Update this documentation with the new scripts from cluster
 
 # II. Running PHONEMeS on a Cluster
 
@@ -35,13 +34,15 @@ Run `prepOptim.R` and produce `data4cluster_n.RData`. Here, `n` denotes the inde
 
 ### 2. Move to cluster
 
-Copy the following files to a cluster:
+Copy the prepared data as well as the cluster scripts (which can be found [here](https://github.com/saezlab/PHONEMeS/tree/master/Example/cluster_scripts)) to the cluster:
 
  * data4cluster_n.RData
- * processGx_n.R
- * runScriptGx_n.sh
- * scriptGxopt_50models_n.R
- * import_n.R
+ * processGx.R
+ * runScriptGx.sh
+ * scriptGxopt_50models.R
+ * import.R
+ 
+Please note that the scripts may require minor changes (e.g. modifications of the paths in the scripts).
 
 ### 3. Is the package installed?
 
@@ -57,10 +58,10 @@ mkdir Results_n
 
 ### 5. Run one independent optimization
 
-This step should be repeated multiple times with different indices. The script `runScriptGx_n.sh` will submit the necessary jobs to the queue of your LSF system. Make sure to modify the script as necessary (e.g. correcting the queue name).
+This step should be repeated multiple times with different indices. The script `runScriptGx.sh` will submit the necessary jobs to the queue of your LSF system. Make sure to modify the script as necessary (e.g. correcting the queue name).
 
 ```bash
-./runScriptGx_n.sh
+./runScriptGx_n.sh n
 ```
 
 ### 6. Move results to your local machine
