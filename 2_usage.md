@@ -61,7 +61,7 @@ mkdir Results_n
 This step should be repeated multiple times with different indices. The script `runScriptGx.sh` will submit the necessary jobs to the queue of your LSF system. Make sure to modify the script as necessary (e.g. correcting the queue name).
 
 ```bash
-./runScriptGx_n.sh n
+./runScriptGx.sh n
 ```
 
 ### 6. Move results to your local machine
