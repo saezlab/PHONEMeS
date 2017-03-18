@@ -18,4 +18,18 @@ Run ```preOptim.R``` which takes as an input the data matrix output from ```preP
 * the tolerance *tol*
 * the maximum number of times that an edge is copied through at each generation *cap*
 * index of the optimisation (for naming files and folders) *resN*
+The number of the independent optimization runs on this example as we can see from the script is 6.
+The output of the ```preOptim.R``` will be ```data4cluster_n.RData``` where ```n``` denotes the index of the independent optimization run.
+
+Before running the analysis on the cluster, we have to make sure that the [PHONEMeS package](https://github.com/saezlab/PHONEMeS/blob/master/Package/PHONEMeS_0.2.7.tar.gz) is already installed on the cluster. After we make sure that PHONEMeS has been successfully installed, we import on the cluster the outputs from the previous step ```data4cluster_n.RData``` and the other following scripts (**important note:** in the cluster we create different directories for each independent run through ```mkdir``` command):
+* ```processGx.R``` which combines all the results (model and scores) for each independent optimization runs.
+* ```runScriptGx.sh``` for running the parallel processes
+* ```scriptGxopt_50models.R``` which optimizes all the models sampled.
+* ```import.R``` for locally importing the outputs from the analysis on the cluster.
+After running the bash script```./runScriptGx.sh n```, on each of the folders we created we will have our outputs which we need to import locally.
+
+After every result has been imported successfully, we process our results with ```postOptim.R``` which will assign attributes to each of the nodes and edges of each of the independent runs and save everything on one single folder (```objects_p3.RData```). Through ```comb_optim.R``` we will then combine all the ```objects_pn.RData``` in a sngle final resulting network.
+
+As for the visualization of the resulting network, we can use Cytoscape. For more details check the description in the [Usage](https://saezlab.github.io/PHONEMeS/2_usage/) section.
+
 
