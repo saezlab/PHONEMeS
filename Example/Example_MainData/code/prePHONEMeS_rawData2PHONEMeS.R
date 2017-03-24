@@ -338,7 +338,55 @@ table(unlist(lapply(GMM.res, function(x){length(intersect(which(x[,"clus"] == "P
 #497 sites are perturbed under 1 condition
 ##########IDs
 
+########
+#Fixing for the missing data
 
+GMM.ID <- as.data.frame(matrix(, nrow = length(GMM.res), ncol = 6))
+colnames(GMM.ID) <- c("dataID", "UPID", "site", "pos", "res", "S.cc")
+GMM.ID$dataID <- names(GMM.res)
+for(i in 1:nrow(GMM.ID)){
+  geneID <- strsplit(GMM.ID$dataID[i], split = " ")[[1]][1]
+  siteID <- strsplit(strsplit(GMM.ID$dataID[i], split = " ")[[1]][2], split = "-")[[1]][2]
+  resID <- strsplit(siteID, split = "")[[1]][1]
+  posID <- ""
+  for(j in 2:length(strsplit(siteID, split = "")[[1]])){
+    posID <- paste(posID, strsplit(siteID, split = "")[[1]][j], sep = "")
+  }
+  
+  GMM.ID$UPID[i] <- paste(geneID, "_HUMAN", sep = "")
+  GMM.ID$site[i] <- siteID
+  GMM.ID$pos[i] <- posID
+  GMM.ID$res[i] <- resID
+  GMM.ID$S.cc[i] <- paste(GMM.ID$UPID[i], ".", resID, ".", posID, sep = "")
+}
+
+GMM.res.no.FC <- GMM.res
+GMM.res <- list()
+for(i in 1:length(GMM.res.no.FC)){
+  tempGMM <- matrix(, nrow = dim(GMM.res.no.FC[[i]])[1], ncol = dim(GMM.res.no.FC[[i]])[2]+1)
+  rownames(tempGMM) <- rownames(GMM.res.no.FC[[i]])
+  tempGMM[, 1:dim(tempGMM)[2]-1] <- GMM.res.no.FC[[i]]
+  rows <- rownames(GMM.res.no.FC[[i]])
+  for(j in 2:nrow(tempGMM)){
+    colID <- which(colnames(limma.FCvCtrl.d6.NAr)==rows[j])
+    if(!is.null(colID)){
+      tempGMM[j, dim(tempGMM)[2]] <- limma.FCvCtrl.d6.NAr[i, colID]
+    }
+    else{
+      tempGMM[j, dim(tempGMM)[2]] <- NA
+    }
+  }
+  colnames(tempGMM) <- c(colnames(GMM.res.no.FC[[i]]), "FCvC")
+  GMM.res[[length(GMM.res)+1]] <- tempGMM
+}
+
+names(GMM.res) <- names(GMM.res.no.FC)
+
+#saving the main results
+save(list=c("GMM.res", "GMM.res.noFC", "GMM.res.ID", "d12", "d12.log.dN", "limma.FCvCtrl.d6.NAr", "limma.FCvCtrl.d6.pval.NAr", "limma.alone.d6.NAr"),file="../data/dataObjects_2_2.RData")
+
+
+# FROM HERE ON NO NEED TO CONTINUE EXECUTION
 # FROM HERE ON, THE CODE DOES NOT EXECUTE WITHOUT ERROR:
 # object 'data2' not found
 
