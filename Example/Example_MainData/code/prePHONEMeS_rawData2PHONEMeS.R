@@ -383,7 +383,7 @@ for(i in 1:length(GMM.res.no.FC)){
 names(GMM.res) <- names(GMM.res.no.FC)
 
 #saving the main results
-save(list=c("GMM.res", "GMM.res.noFC", "GMM.res.ID", "d12", "d12.log.dN", "limma.FCvCtrl.d6.NAr", "limma.FCvCtrl.d6.pval.NAr", "limma.alone.d6.NAr"),file="../data/dataObjects_2_2.RData")
+save(list=c("GMM.res", "GMM.res.noFC", "GMM.ID", "d12", "d12.log.dN", "limma.FCvCtrl.d6.NAr", "limma.FCvCtrl.d6.pval.NAr", "limma.alone.d6.NAr"),file="../data/dataObjects_2_2.RData")
 
 
 # FROM HERE ON NO NEED TO CONTINUE EXECUTION
