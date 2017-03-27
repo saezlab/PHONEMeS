@@ -13,7 +13,8 @@ load("../data/allD_noCSK_filt.RData")
 load("../data/dataObjects_PHONEMeS.RData")
 #Make the data objects that will be needed
 bg<-new("KPSbg", interactions=allD, species=unique(c(allD$K.ID, allD$S.cc)))
-dataGMM<-new("GMMres", res=GMM.res.noFC, IDmap=GMM.res.ID, resFC=GMM.res)
+#dataGMM<-new("GMMres", res=GMM.res.noFC, IDmap=GMM.res.ID, resFC=GMM.res)
+dataGMM<-new("GMMres", res=GMM.res.no.FC, IDmap=GMM.ID, resFC=GMM.res)
 #Choose the drug targets
 targets.P<-list(cond1=c("MTOR_HUMAN"))
 #Choose the drug treatments matching to the drug targets
