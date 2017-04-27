@@ -14,7 +14,7 @@ This package contains the R package and accompanying scripts that implement the 
 
 <img src="/PHONEMeS/public/network.png" alt="Example network">
 
-_Example output of PHONEMeS analysis after MTOR inhibition_
+<center><i>Example output of PHONEMeS analysis after MTOR inhibition</i></center>
 
 ## How to cite us
 
