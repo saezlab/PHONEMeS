@@ -16,11 +16,11 @@ _Example output of PHONEMeS analysis after MTOR inhibition_
 
 # References
 
-+ Main reference: [Terfve et al., _Nat Comm_, 2015](http://www.nature.com/articles/ncomms9033)
++ Main reference:
 
-  > Terfve, C. D. A., Wilkes, E. H., Casado, P., Cutillas, P. R., and Saez-Rodriguez, J. (2015). Large-scale models of signal propagation in human cells derived from discovery phosphoproteomic data. Nature Communications, 6:8033.
+  > Terfve, C. D. A., Wilkes, E. H., Casado, P., Cutillas, P. R., and Saez-Rodriguez, J. (2015). [Large-scale models of signal propagation in human cells derived from discovery phosphoproteomic data.](http://www.nature.com/articles/ncomms9033) _Nature Communications_, 6:8033.
 
-+ Description of part of the data: [Wilkes et al., _PNAS_, 2015](http://www.pnas.org/content/112/25/7719.abstract)
++ Description of part of the data:
 
-  > Wilkes, E. H., Terfve, C., Gribben, J. G., Saez-Rodriguez, J., and Cutillas, P. R. (2015). Empirical inference of circuitry and plasticity in a kinase signaling network. Proceedings of the National Academy of Sciences of the United States of America, 112(25):7719–24.
+  > Wilkes, E. H., Terfve, C., Gribben, J. G., Saez-Rodriguez, J., and Cutillas, P. R. (2015). [Empirical inference of circuitry and plasticity in a kinase signaling network.] (http://www.pnas.org/content/112/25/7719.abstract) _Proceedings of the National Academy of Sciences of the United States of America_, 112(25):7719–24.
  
