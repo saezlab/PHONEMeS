@@ -12,6 +12,8 @@ PHONEMeS (**PHO**sphorylation **NE**tworks for **M**ass **S**pectrometry) is a m
 
 This package contains the R package and accompanying scripts that implement the method as well as several examples of how to run a PHONEMeS analysis.
 
+The input for PHONEMeS consists of phosphoproteomic data after treatment with kinase inhibitors. Gaussian mixture modeling is then used to find phosphosites that exhibit a naturally Boolean behaviour with two populations, representing a control and a perturbed state. The data are mapped unto a kinase/phosphatase-substrate network taken from several dedicated databases. PHONEMeS then optimizes the network and extracts possible paths connecting inhibited kinases and perturbed phosphosites by iteratively sampling edges from the background network, simulating the logic model, and finally evaluating the network by comparison to the data. In each iteration, sampling weights are corrected based on the edge frequencies in the best models.
+
 <img src="/PHONEMeS/public/network.png" alt="Example network">
 
 <center><i>Example output of PHONEMeS analysis after MTOR inhibition</i></center>
