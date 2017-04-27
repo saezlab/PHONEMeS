@@ -4,7 +4,7 @@ title: Home
 ---
 
 
-# Welcome to the PHONEMeS Documentation Page!
+# PHONEMeS
 
 PHONEMeS (**PHO**sphorylation **NE**tworks for **M**ass **S**pectrometry) is a method to model signaling networks based on untargeted phosphoproteomics mass spectrometry data and kinase/phosphatase-substrate interactions.
 
