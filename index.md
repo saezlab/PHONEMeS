@@ -24,7 +24,9 @@ Please use this reference to cite PHONEMeS:
 
 ```
 @article{Terfve2015,
-         author = {Terfve, Camille D A and Wilkes, Edmund H and Casado, Pedro and Cutillas, Pedro R and Saez-Rodriguez, Julio},
+         author = {Terfve, Camille D A and Wilkes, Edmund H and 
+                   Casado, Pedro and Cutillas, Pedro R and 
+                   Saez-Rodriguez, Julio},
          doi = {10.1038/ncomms9033},
          issn = {2041-1723},
          journal = {Nature communications},
@@ -35,7 +37,7 @@ Please use this reference to cite PHONEMeS:
          url = {http://www.ncbi.nlm.nih.gov/pubmed/26354681},
          volume = {6},
          year = {2015}
-}
+         }
 ```
 
 ## Other References
