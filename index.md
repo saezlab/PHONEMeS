@@ -18,7 +18,7 @@ The input for PHONEMeS consists of phosphoproteomic data after treatment with ki
 
 <center><i>Example output of PHONEMeS analysis after MTOR inhibition</i></center>
 
-## How to cite us
+## References
 
 Please use this reference to cite PHONEMeS:
 
