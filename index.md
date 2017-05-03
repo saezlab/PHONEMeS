@@ -42,7 +42,7 @@ Please use this reference to cite PHONEMeS:
          }
 ```
 
-## Other References
+### Other References
 
 + Description of parts of the data:
 
