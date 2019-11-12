@@ -48,3 +48,9 @@ Please use this reference to cite PHONEMeS:
 
   > Wilkes, E. H., Terfve, C., Gribben, J. G., Saez-Rodriguez, J., and Cutillas, P. R. (2015). [Empirical inference of circuitry and plasticity in a kinase signaling network.](http://www.pnas.org/content/112/25/7719.abstract) _Proceedings of the National Academy of Sciences of the United States of America_, **112**(25):7719–24.
  
++ Application of PHONEMeS over time-resolved data:
+
+> Schäfer A., Gjerga E., Welford R.W.D., Renz I., Lehembre F., Groenen P.M.A., Saaez-Rodriguez J., Aebersold R., and Gstaiger M. (August 2019). [Elucidating essential kinases of endothelin signalling by logic modelling of phosphoproteomics data](https://www.embopress.org/doi/abs/10.15252/msb.20198828) _Molecular Systems Biology_, **Volume 15, Issue 8**.
+  
+Codes for this project can be found [here](https://github.com/saezlab/EDN_phospho)
+
