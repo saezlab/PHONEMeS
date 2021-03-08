@@ -48,4 +48,4 @@ If you use the original implementation of PHONEMeS or if you would like to make 
   > Rinschen M.M., Palygin O., Guijas C., Palermo A., Palacio-Escat N., Domingo-Almenara X., Montenegro-Burke R., Saez-Rodriguez J., Staruschenko A. and Siuzdak G. (December 2019). [Metabolic rewiring of the hypertensive kidney](https://stke.sciencemag.org/content/12/611/eaax9760) _Science Signalling_, **Vol. 12, Issue 611, eaax9760**
  
  + Application of PHONEMeS-ILP over colon cancer data:
- > Gjerga E., Dugourd A., Tobalina L., Sousa A., Saez-Rodriguez J. (2021). [PHONEMeS: Efficient Modeling of Signaling Networks Derived from Large-Scale Mass-Spectrometry Data](https://saezlab.org/) _J Prot Res_, 
+  > Gjerga E., Dugourd A., Tobalina L., Sousa A., Saez-Rodriguez J. (2021). [PHONEMeS: Efficient Modeling of Signaling Networks Derived from Large-Scale Mass-Spectrometry Data](https://saezlab.org/) _J Prot Res_, 
