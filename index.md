@@ -18,7 +18,7 @@ Usage details about PHONEMeS-ILP can be found [here](https://saezlab.github.io/P
 
 <img src="/PHONEMeS/public/schaefer_network.jpg" alt="Example network">
 
-<center><i>Time-resolved network model from PHONEMeS for UACC257 cells - figure from [Schafer et.al. 2019](https://www.embopress.org/doi/full/10.15252/msb.20198828) , licensed under the Creative Commons Attribution CC BY 4.0 ). EDNRB (green diamond) was connected to its target phosphorylation sites (red hexagons) through intermediary kinases or G proteins (blue circles) in a time‐resolved variant of the PHONEMeS approach. Central kinases, which were also identified by kinase activation prediction, are shown as intermediary kinases with dark blue shading. Edge thickness corresponds to weights, which were assigned by downsampling the network 100 times.</i></center>
+<center><i>Time-resolved network model from PHONEMeS for UACC257 cells, figure from [Schafer et.al. 2019](https://www.embopress.org/doi/full/10.15252/msb.20198828) (licensed under the Creative Commons Attribution CC BY 4.0 ). EDNRB (green diamond) was connected to its target phosphorylation sites (red hexagons) through intermediary kinases or G proteins (blue circles) in a time‐resolved variant of the PHONEMeS approach. Central kinases, which were also identified by kinase activation prediction, are shown as intermediary kinases with dark blue shading. Edge thickness corresponds to weights, which were assigned by downsampling the network 100 times.</i></center>
 
 ## References
 
