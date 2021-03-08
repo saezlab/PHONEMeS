@@ -43,7 +43,7 @@ If you use the original implementation of PHONEMeS or if you would like to make 
 
   > Schäfer A., Gjerga E., Welford R.W.D., Renz I., Lehembre F., Groenen P.M.A., Saaez-Rodriguez J., Aebersold R., and Gstaiger M. (August 2019). [Elucidating essential kinases of endothelin signalling by logic modelling of phosphoproteomics data](https://www.embopress.org/doi/abs/10.15252/msb.20198828) _Molecular Systems Biology_, **Volume 15, Issue 8**. Codes for this project can be found [here](https://github.com/saezlab/EDN_phospho).
 
-+ Application of PHONEMeS-ILP to analyze the effect of hypertensive insulin on kidneys:
++ Application of PHONEMeS-ILP to analyze the effect of hypertensive insults on kidneys:
 
   > Rinschen M.M., Palygin O., Guijas C., Palermo A., Palacio-Escat N., Domingo-Almenara X., Montenegro-Burke R., Saez-Rodriguez J., Staruschenko A. and Siuzdak G. (December 2019). [Metabolic rewiring of the hypertensive kidney](https://stke.sciencemag.org/content/12/611/eaax9760) _Science Signalling_, **Vol. 12, Issue 611, eaax9760**
  
