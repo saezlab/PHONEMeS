@@ -27,7 +27,7 @@ From signalling resources such as [OmniPath](https://omnipathdb.org/) we can ass
 small red circles at the top left) at the protein level and then translating the directed interactions between proteins into their protein-site equivalents. This is achieved by the addition of integrator nodes that propagate the information from a kinase site to the kinase itself (i.e., nodes E, D, and B). This is the network that is used for training. For interactions in which we have no information about the site that is being targeted (i.e., DB), we model it by designating the target node with an auxiliary site that has a recognizable pattern “_R1” (i.e., node B is depicted on the bipartite network as B_R1).
 
 # IV. Network Inference
-The perturbation signalling network can be inferred (**F**) by integrating the analysis results obtained from step (**B-C**) with the PKN we have generated in steps (**D-E**). This is achieved by the implementation of two optimization methods: 1) Deterministic (PHONEMeS-ILP) and 2) Stochastic (PHONEMeS-stoch). 
+The perturbation signalling network can be inferred (**F**) by integrating the analysis results obtained from step (**B-C**) with the PKN we have generated in steps (**D-E**). This is achieved by the implementation of two optimization methods: *1)* Deterministic (PHONEMeS-ILP) and *2)* Stochastic (PHONEMeS-stoch). 
 
 There are three modes in which we can perform analysis with PHONEMeS-ILP depending on the kind of experimental data we have:
 
@@ -37,6 +37,6 @@ There are three modes in which we can perform analysis with PHONEMeS-ILP dependi
 
 More information about each PHONEMeS-ILP variant can be found on our recent [Gjerga et.al.](https://saezlab.org/) paper.
 
-The previous implementation of PHONEMeS currently can only handle analysis from perturbation data at single time-point.
+The previous implementation of PHONEMeS (PHONEMeS-stoch, [Terfve et.al.](https://www.nature.com/articles/ncomms9033)) currently can only handle analysis from perturbation data at single time-point.
 
 Examples about how we can make use of each approach can be found [here](https://saezlab.github.io/PHONEMeS/3_examples/). After the optimization step, the contextualized network solution are provided as tables which can be visualized through [CytoScape](https://cytoscape.org/) (**G**) and we can further use them to obtain some meaningful biological insights (**H**).
