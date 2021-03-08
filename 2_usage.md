@@ -7,7 +7,7 @@ title: Usage
 
 PHONEMeS follows the pipeline that is depicted in the following figure:
 
-<img src="/PHONEMeS/public/network.png" alt="Example network">
+<img src="/PHONEMeS/public/phonemes_pipeline.png" alt="PHONEMeS Pipeline">
 
 # I. Data Preparation
 The untargeted phosphoproteomics data (**B**) used for the identification of the signaling models in PHONEMeS is a data matrix containing the peak heights for each of the measured peptides accross each condition (treatments and control) and replicates and which maps to specific sites over a certain number of proteins (as obtained from the experiments in step **A**). If the data is not normalized, we quantile normalize the *log10* of the raw intensity values and then use a linear model to estimate the effects of each drug over a control state by computing the log fold change between each point of these two conditions and estimating their significance using a *t-statistic* as computed by the function *eBayes* implemented by the *Bioconductor* package *[limma](http://www.bioconductor.org/packages/2.12/bioc/html/limma.html)*
