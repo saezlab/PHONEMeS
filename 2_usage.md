@@ -35,7 +35,7 @@ There are three modes in which we can perform analysis with PHONEMeS-ILP dependi
 + Analysis from perturbation data at multiple time-points (*PHONEMeS-mult*) where the main goal is to estimate the regulated signalling network in a time-evolving manner.
 + Analysis from the upside-down implementation of PHONEMeS-ILP (*PHONEMeS-ud*) where we can integrate information about kinase activities with PHONEMeS modelling in order to probe the state of signalling upstream and downstream of deregulated kinases.
 
-More information about each PHONEMeS-ILP variant can be found on our recent [Gjerga et.al.](https://saezlab.org/) paper.
+More information about each PHONEMeS-ILP variant can be found on our recent [Gjerga et.al.](https://pubs.acs.org/doi/full/10.1021/acs.jproteome.0c00958) paper.
 
 The previous implementation of PHONEMeS (PHONEMeS-stoch, [Terfve et.al.](https://www.nature.com/articles/ncomms9033)) currently can only handle analysis from perturbation data at single time-point.
 
