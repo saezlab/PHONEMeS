@@ -17,6 +17,7 @@ PHONEMeS (**PHO**sphorylation **NE**tworks for **M**ass **S**pectrometry) is a m
 
 Information about the various PHONEMeS variants implemented and usage details and pipeline can be found [here](https://saezlab.github.io/PHONEMeS/2_usage/).
 
+<img src="/PHONEMeS/public/schaefer_network.jpg" alt="Example network">
 <center><i>Figure 2: Example of a time-resolved network model output from PHONEMeS for UACC257 cells. Figure from [Schafer et.al. 2019](https://www.embopress.org/doi/full/10.15252/msb.20198828) (licensed under the Creative Commons Attribution CC BY 4.0 ). EDNRB (green diamond) was connected to its target phosphorylation sites (red hexagons) through intermediary kinases or G proteins (blue circles) in a time‐resolved variant of the PHONEMeS approach. Central kinases, which were also identified by kinase activation prediction, are shown as intermediary kinases with dark blue shading. Edge thickness corresponds to weights, which were assigned by downsampling the network 100 times.</i></center>
 
 ## References
