@@ -1,2 +1,6 @@
-.DS_Store
+.Rproj.user
 .Rhistory
+.RData
+.Ruserdata
+.DS_Store
+omnipathr-log/

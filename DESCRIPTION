@@ -1,0 +1,25 @@
+Package: CARNIPHAL
+Title: tool to run CARNIVAL on phosphoproteomic data
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Sophia",
+           family = "Müller-Dott",
+           role = c("aut", "cre"),
+           email = "sophia.mueller-dott@uni-heidelberg.de",
+           comment = c(ORCID = "YOUR-ORCID-ID"))
+Description: This package runs CARNIVAL for phosphoproteomic data with a prior knowledge network 
+    consisting of protein-protein and protein-phosphosite interactions form OmnipathR.
+License: GNU GENERAL PUBLIC LICENSE 3
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.2
+Depends: 
+    R (>= 2.10)
+Imports: 
+    CARNIVAL,
+    magrittr,
+    dplyr,
+    igraph
+Remotes:
+    saezlab/CARNIVAL@b3a84c6ba9706547caca02644566d75ee621f56
