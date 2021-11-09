@@ -1,6 +1,6 @@
-Package: CARNIPHAL
-Title: tool to run CARNIVAL on phosphoproteomic data
-Version: 0.0.0.9000
+Package: PHONEMeS
+Title: tool to run PHONEMeS on phosphoproteomic data
+Version: 2.0.0
 Authors@R: 
     person(given = "Sophia",
            family = "Müller-Dott",
@@ -9,7 +9,7 @@ Authors@R:
            comment = c(ORCID = "YOUR-ORCID-ID"))
 Description: This package runs CARNIVAL for phosphoproteomic data with a prior knowledge network 
     consisting of protein-protein and protein-phosphosite interactions form OmnipathR.
-License: GNU GENERAL PUBLIC LICENSE 3
+License: GNU GENERAL PUBLIC LICENSE 2
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
