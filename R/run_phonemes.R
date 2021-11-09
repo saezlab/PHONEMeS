@@ -74,23 +74,23 @@ run_phonemes <- function(inputObj,
                                       poolrelGAP = poolrelGAP)
 
   # Remove nodes from Carnival results that have no up- or downAct
-  resCarnival$nodesAttributes <- as_tibble(resCarnival$nodesAttributes) %>% dplyr::mutate(across(c(ZeroAct, UpAct, DownAct, AvgAct), as.double))
+  resCarnival$nodesAttributes <- as.data.frame(resCarnival$nodesAttributes) %>% dplyr::mutate(across(c(ZeroAct, UpAct, DownAct, AvgAct), as.double))
   zeroNodes <- resCarnival$nodesAttributes %>% dplyr::filter(UpAct == 0 & DownAct == 0) %>% pull(Node)
 
   resCarnival$nodesAttributes <- resCarnival$nodesAttributes %>% dplyr::filter(!Node %in% zeroNodes)
   rm(zeroNodes)
 
-  resCarnival$weightedSIF <- dplyr::as_tibble(resCarnival$weightedSIF)%>% dplyr::mutate(across(Weight, as.double)) %>% dplyr::filter(Node1 %in% resCarnival$nodesAttributes$Node & Node2 %in% resCarnival$nodesAttributes$Node)
+  resCarnival$weightedSIF <- as.data.frame(resCarnival$weightedSIF)%>% dplyr::mutate(across(Weight, as.double)) %>% dplyr::filter(Node1 %in% resCarnival$nodesAttributes$Node & Node2 %in% resCarnival$nodesAttributes$Node)
 
   # Add degree to attributes
   degree_upstream <- resCarnival$weightedSIF %>% dplyr::group_by(Node1) %>% dplyr::summarise(degree_upstream  = n()) %>% dplyr::rename(Node = "Node1")
   degree_downstream <- resCarnival$weightedSIF %>% dplyr::group_by(Node2) %>% dplyr::summarise(degree_downstream  = n()) %>% dplyr::rename(Node = "Node2")
   degree_df <- base::merge(degree_upstream, degree_downstream, by = "Node", all = TRUE) %>%
-    dplyr::as_tibble() %>%
+    as.data.frame() %>%
     tidyr::replace_na(list(degree_upstream = 0, degree_downstream = 0)) %>%
     dplyr::mutate(degree_total = rowSums(across(c(degree_upstream, degree_downstream))))
 
-  resCarnival$nodesAttributes <- merge(resCarnival$nodesAttributes,degree_df, by = "Node", all = TRUE) %>% as_tibble()
+  resCarnival$nodesAttributes <- merge(resCarnival$nodesAttributes,degree_df, by = "Node", all = TRUE) %>% as.data.frame()
 
   return(list(res = resCarnival,
               network = netObj,
