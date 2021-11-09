@@ -75,7 +75,7 @@ run_phonemes <- function(inputObj,
 
   # Remove nodes from Carnival results that have no up- or downAct
   resCarnival$nodesAttributes <- as.data.frame(resCarnival$nodesAttributes) %>% dplyr::mutate(across(c(ZeroAct, UpAct, DownAct, AvgAct), as.double))
-  zeroNodes <- resCarnival$nodesAttributes %>% dplyr::filter(UpAct == 0 & DownAct == 0) %>% pull(Node)
+  zeroNodes <- resCarnival$nodesAttributes %>% dplyr::filter(UpAct == 0 & DownAct == 0) %>% dplyr::pull(Node)
 
   resCarnival$nodesAttributes <- resCarnival$nodesAttributes %>% dplyr::filter(!Node %in% zeroNodes)
   rm(zeroNodes)
