@@ -83,8 +83,8 @@ run_phonemes <- function(inputObj,
   resCarnival$weightedSIF <- as.data.frame(resCarnival$weightedSIF)%>% dplyr::mutate(dplyr::across(Weight, as.double)) %>% dplyr::filter(Node1 %in% resCarnival$nodesAttributes$Node & Node2 %in% resCarnival$nodesAttributes$Node)
 
   # Add degree to attributes
-  degree_upstream <- resCarnival$weightedSIF %>% dplyr::group_by(Node1) %>% dplyr::summarise(degree_upstream  = dplyr::n()) %>% dplyr::rename(Node = "Node1")
-  degree_downstream <- resCarnival$weightedSIF %>% dplyr::group_by(Node2) %>% dplyr::summarise(degree_downstream  = dplyr::n()) %>% dplyr::rename(Node = "Node2")
+  degree_upstream <- resCarnival$weightedSIF %>% dplyr::group_by(Node2) %>% dplyr::summarise(degree_upstream  = dplyr::n()) %>% dplyr::rename(Node = "Node2")
+  degree_downstream <- resCarnival$weightedSIF %>% dplyr::group_by(Node1) %>% dplyr::summarise(degree_downstream  = dplyr::n()) %>% dplyr::rename(Node = "Node1")
   degree_df <- base::merge(degree_upstream, degree_downstream, by = "Node", all = TRUE) %>%
     as.data.frame() %>%
     tidyr::replace_na(list(degree_upstream = 0, degree_downstream = 0)) %>%
