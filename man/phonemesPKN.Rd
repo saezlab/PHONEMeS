@@ -2,7 +2,7 @@
 % Please edit documentation in R/data.R
 \name{phonemesPKN}
 \alias{phonemesPKN}
-\title{The PKN used in Phonemes to link deregulated phosphosites to perturbed kinases.
+\title{The main PKN used in Phonemes to link deregulated phosphosites to perturbed kinases.
 It combines kinase-substrate and protein-protein interactions.}
 \format{
 The full PKN contains 56,738 interactions: 36,915 kinase-substrate interactions (1,688 kinases; 15,385 phosphosites); 19,823 protein-protein interactions
@@ -16,7 +16,7 @@ The full PKN contains 56,738 interactions: 36,915 kinase-substrate interactions 
 \url{https://github.com/saezlab/PHONEMeS/blob/master/data-raw/phonemesPKN.R}
 }
 \description{
-The PKN used in Phonemes to link deregulated phosphosites to perturbed kinases.
+The main PKN used in Phonemes to link deregulated phosphosites to perturbed kinases.
 It combines kinase-substrate and protein-protein interactions.
 }
 \examples{
