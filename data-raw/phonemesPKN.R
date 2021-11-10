@@ -22,11 +22,11 @@ sif <- omnipath_sd[, c("source_genesymbol", "consensus_stimulation", "consensus_
 sif$consensus_stimulation <- NULL
 colnames(sif) <- c("source", "interaction", "target")
 
-# remove complexes
-sif$source <- gsub(":", "x", sif$source)
-sif$source <- gsub("-", "x", sif$source)
-sif$target <- gsub(":", "x", sif$target)
-sif$target <- gsub("-", "x", sif$target)
+# remove special characters (complexes are now separated with __, protein names with a minus are replaces with ___)
+sif$source <- gsub("_", "__", sif$source)
+sif$source <- gsub("-", "___", sif$source)
+sif$target <- gsub("_", "__", sif$target)
+sif$target <- gsub("-", "___", sif$target)
 
 ### Construct kinase-substrate interaction network
 omnipath_ptm <- get_signed_ptms()
