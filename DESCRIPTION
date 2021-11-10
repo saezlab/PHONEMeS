@@ -9,7 +9,7 @@ Authors@R:
            comment = c(ORCID = "YOUR-ORCID-ID"))
 Description: This package runs CARNIVAL for phosphoproteomic data with a prior knowledge network 
     consisting of protein-protein and protein-phosphosite interactions form OmnipathR.
-License: GPL-3
+License: GPL-3 + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
