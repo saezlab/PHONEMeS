@@ -20,6 +20,7 @@ Imports:
     CARNIVAL,
     magrittr,
     dplyr,
-    igraph
+    igraph,
+    tidyr
 Remotes:
     saezlab/CARNIVAL@b3a84c6ba9706547caca02644566d75ee621f56
