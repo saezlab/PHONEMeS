@@ -80,15 +80,24 @@ run_phonemes <- function(inputObj,
   resCarnival$nodesAttributes <- resCarnival$nodesAttributes %>% dplyr::filter(!Node %in% zeroNodes)
   rm(zeroNodes)
 
-  resCarnival$weightedSIF <- as.data.frame(resCarnival$weightedSIF)%>% dplyr::mutate(dplyr::across(Weight, as.double)) %>% dplyr::filter(Node1 %in% resCarnival$nodesAttributes$Node & Node2 %in% resCarnival$nodesAttributes$Node)
+  resCarnival$weightedSIF <- as.data.frame(resCarnival$weightedSIF) %>%
+    dplyr::mutate(dplyr::across(Weight, as.double)) %>%
+    dplyr::filter(Node1 %in% resCarnival$nodesAttributes$Node & Node2 %in% resCarnival$nodesAttributes$Node)
 
   # Add degree to attributes
-  degree_upstream <- resCarnival$weightedSIF %>% dplyr::group_by(Node2) %>% dplyr::summarise(degree_upstream  = dplyr::n()) %>% dplyr::rename(Node = "Node2")
-  degree_downstream <- resCarnival$weightedSIF %>% dplyr::group_by(Node1) %>% dplyr::summarise(degree_downstream  = dplyr::n()) %>% dplyr::rename(Node = "Node1")
-  degree_df <- base::merge(degree_upstream, degree_downstream, by = "Node", all = TRUE) %>%
+  in_degree <- resCarnival$weightedSIF %>% dplyr::group_by(Node2) %>%
+    dplyr::summarise(in_degree  = dplyr::n()) %>%
+    dplyr::rename(Node = "Node2")
+
+  out_degree <- resCarnival$weightedSIF %>%
+    dplyr::group_by(Node1) %>%
+    dplyr::summarise(out_degree  = dplyr::n()) %>%
+    dplyr::rename(Node = "Node1")
+
+  degree_df <- base::merge(in_degree, out_degree, by = "Node", all = TRUE) %>%
     as.data.frame() %>%
-    tidyr::replace_na(list(degree_upstream = 0, degree_downstream = 0)) %>%
-    dplyr::mutate(degree_total = rowSums(dplyr::across(c(degree_upstream, degree_downstream))))
+    tidyr::replace_na(list(in_degree = 0, out_degree = 0)) %>%
+    dplyr::mutate(tot_degree = rowSums(dplyr::across(c(in_degree, out_degree))))
 
   resCarnival$nodesAttributes <- base::merge(resCarnival$nodesAttributes,degree_df, by = "Node", all = TRUE) %>% as.data.frame()
 
@@ -103,8 +112,8 @@ run_phonemes <- function(inputObj,
 #'
 #' This function readd links between phosphosite and their correpsonding proteins
 #'
-#' @param phonemes_res carnival result from the run_carnival function
-#' @return List of CARNIVAL results and final inputObj, measObj, netObj used, with psites attached
+#' @param phonemes_res phonemes result from the run_phonemes function
+#' @return List of PHONEMES results and final inputObj, measObj, netObj used, with psites attached
 #' @export
 #'
 reattach_psites <- function(phonemes_res)
@@ -132,4 +141,44 @@ reattach_psites <- function(phonemes_res)
   phonemes_res$res$nodesAttributes <- att
 
   return(phonemes_res)
+}
+
+#' get_protein_network
+#'
+#' This function readd links between phosphosite and their correpsonding proteins
+#'
+#' @param phonemes_res phonemes result from the run_phonemes function
+#' @return Phonemes network only consisting of protein-protein interactions
+#' @importFrom dplyr %>%
+#' @export
+#'
+get_protein_network <- function(phonemes_res)
+{
+  sif <- phonemes_res$res$weightedSIF
+  att <- phonemes_res$res$nodesAttributes
+
+  sif <- sif %>% dplyr::filter(!grepl(pattern = "[a-zA-Z0-9]_[a-zA-Z0-9]", sif$Node2))
+  att <- att %>% dplyr::filter(Node %in% union(sif$Node1, sif$Node2))
+
+  # Add protein degree to attributes
+  in_degree <- sif %>% dplyr::group_by(Node2) %>%
+    dplyr::summarise(protein_in_degree  = dplyr::n()) %>%
+    dplyr::rename(Node = "Node2")
+
+  out_degree <- sif %>%
+    dplyr::group_by(Node1) %>%
+    dplyr::summarise(protein_out_degree  = dplyr::n()) %>%
+    dplyr::rename(Node = "Node1")
+
+  degree_df <- base::merge(in_degree, out_degree, by = "Node", all = TRUE) %>%
+    as.data.frame() %>%
+    tidyr::replace_na(list(protein_in_degree = 0, protein_out_degree = 0)) %>%
+    dplyr::mutate(protein_tot_degree = rowSums(dplyr::across(c(protein_in_degree, protein_out_degree))))
+
+  att <- base::merge(att,degree_df, by = "Node", all = TRUE) %>% as.data.frame()
+
+  protein_network <- list(weightedSIF = sif,
+                          nodesAttributes = att)
+
+  return(protein_network)
 }
