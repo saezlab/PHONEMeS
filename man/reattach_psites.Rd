@@ -7,10 +7,10 @@
 reattach_psites(phonemes_res)
 }
 \arguments{
-\item{phonemes_res}{carnival result from the run_carnival function}
+\item{phonemes_res}{phonemes result from the run_phonemes function}
 }
 \value{
-List of CARNIVAL results and final inputObj, measObj, netObj used, with psites attached
+List of PHONEMES results and final inputObj, measObj, netObj used, with psites attached
 }
 \description{
 This function readd links between phosphosite and their correpsonding proteins
