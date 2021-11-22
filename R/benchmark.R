@@ -5,11 +5,12 @@
 #' the phonemes network
 #'
 #' @param phonemes_res carnival result from the run_carnival function
+#' @param th_act threshold for node activity to include in the benchmark
 #' @return list with two elements: the regulatory psites with predicted mode of
 #' regulations and the kinases that catalyse their phosphorilation
 #' @export
 #'
-regulatory_psites <- function(phonemes_res)
+regulatory_psites <- function(phonemes_res, th_act = 0)
 {
   sif <- as.data.frame(phonemes_res$res$weightedSIF)
   att <- as.data.frame(phonemes_res$res$nodesAttributes)
@@ -33,7 +34,7 @@ regulatory_psites <- function(phonemes_res)
 
   predicted_phospho_function$Sign <- sapply(predicted_phospho_function$Node1, function(x, att){
     protein <- gsub("_.*","",x)
-    if(abs(as.numeric(att[att$Node == protein,"AvgAct"])) >= 75)
+    if(abs(as.numeric(att[att$Node == protein,"AvgAct"])) >= th_act)
     {
       mor <- sign(as.numeric(att[att$Node == protein,"AvgAct"]) * as.numeric(att[att$Node == x, "AvgAct"]))
     } else

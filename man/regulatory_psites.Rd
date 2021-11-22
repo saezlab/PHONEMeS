@@ -4,10 +4,12 @@
 \alias{regulatory_psites}
 \title{regulatory_psites}
 \usage{
-regulatory_psites(phonemes_res)
+regulatory_psites(phonemes_res, th_act = 0)
 }
 \arguments{
 \item{phonemes_res}{carnival result from the run_carnival function}
+
+\item{th_act}{threshold for node activity to include in the benchmark}
 }
 \value{
 list with two elements: the regulatory psites with predicted mode of
