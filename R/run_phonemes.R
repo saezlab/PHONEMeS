@@ -182,3 +182,41 @@ get_protein_network <- function(phonemes_res)
 
   return(protein_network)
 }
+
+#' extract_subnetwork
+#'
+#' This function extracts smaller sub networks from the run_phonemes output
+#'
+#' @param phonemes_res Phonemes result from the run_phonemes function
+#' @param targets Network nodes, starting point for the extraction of the sub network
+#' @param n_steps Number of steps to extract down- or upstream of targets
+#' @param mode Character constant to specify direction of the extraction. "In" for upstream nodes, "out" for downstream nodes and "all" for both.
+#' @return Phonemes sub network
+#' @importFrom dplyr %>%
+#' @export
+#'
+extract_subnetwork <- function(phonemes_res, targets, n_steps = 3, mode = "all")
+{
+  sif <- phonemes_res$res$weightedSIF
+  att <- phonemes_res$res$nodesAttributes
+
+  meta_g <- igraph::graph_from_data_frame(sif[,c("Node1","Node2",'Sign')],directed = TRUE)
+
+  if (mode %in% c("in", "out")) {
+    dn_nbours <- igraph::ego(graph = meta_g, order = n_steps, nodes = targets, mode = mode)
+    sub_nodes <- c(unique(names(unlist(dn_nbours))), targets)
+  } else if (mode %in% "all") {
+    dn_nbours_in <- igraph::ego(graph = meta_g, order = n_steps, nodes = targets, mode = "in")
+    dn_nbours_out <- igraph::ego(graph = meta_g, order = n_steps, nodes = targets, mode = "out")
+    sub_nodes <- c(unique(c(names(unlist(dn_nbours_in)), names(unlist(dn_nbours_out)))), targets)
+  }
+
+  sif <- sif %>% dplyr::filter(Node1 %in% sub_nodes & Node2 %in% sub_nodes)
+  att <- att %>% dplyr::filter(Node %in% union(sif$Node1, sif$Node2))
+
+  subnetwork <- list(weightedSIF = sif,
+                     nodesAttributes = att)
+
+  return(subnetwork)
+
+}
