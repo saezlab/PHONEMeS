@@ -200,6 +200,13 @@ extract_subnetwork <- function(phonemes_res, targets, n_steps = 3, mode = "all")
   sif <- phonemes_res$res$weightedSIF
   att <- phonemes_res$res$nodesAttributes
 
+  targets <- targets[targets %in% att$Node]
+  if(purrr::is_empty(targets)){
+    warning("No target found in network. Returning empty data.frame")
+    return(list(weightedSIF = data.frame(),
+                nodesAttributes = data.frame()))
+  }
+
   meta_g <- igraph::graph_from_data_frame(sif[,c("Node1","Node2",'Sign')],directed = TRUE)
 
   if (mode %in% c("in", "out")) {
