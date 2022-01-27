@@ -3,7 +3,9 @@
 **PHONEMeS** (**PHO**sphorylation **NE**tworks for **M**ass **S**pectrometry) is a method to model signalling networks based on untargeted phosphoproteomics mass spectrometry data and kinase/phosphatase-substrate interactions. 
 The newest version of PHONEMeS builds on `CARNIVAL`, and more specifically the `runCARNIVAL`wrapper function. As such, it requires the CARNIVAL package (Version 1.3) to be installed. Additionally, it uses `OmnipathR` to construct prior knowledge networks based on solely kinase-substrate interactions or the combination of kinase-substrate and protein-protein interactions.
 The pipeline requires a vector of input nodes (perturbed kinases) and measured nodes (deregulated phosphosites) that are connected by an interactive version of 
-IBM Cplex or CBC-COIN solver. The IBM ILOG Cplex is freely available through Academic Initiative.
+IBM Cplex or CBC-COIN solver. The IBM ILOG Cplex is freely available through Academic Initiative [here](https://www.ibm.com/products/ilog-cplex-optimization-studio). The [CBC](https://projects.coin-or.org/Cbc) solver is open source and freely available
+for any user. Alternatively for smaller cases, users can rely on the freely available 
+[lpSolve R-package](https://cran.r-project.org/web/packages/lpSolve/index.html). 
 
 
 ### License
@@ -18,6 +20,9 @@ devtools::install_github('saezlab/PHONEMeS')
 ```
 
 ### Usage
+
+A short tutorial on how to run a PHONEMeS analysis using PHONEMeS v2.0.0 is provided
+in the [vignette tutorial](https://github.com/saezlab/PHONEMeS/blob/master/vignettes/tutorial.Rmd).
 
 For a guide how to run a PHONEMeS analysis using PHONEMeS v1.0.0, please refer to the [documentation](https://saezlab.github.io/PHONEMeS).
 
