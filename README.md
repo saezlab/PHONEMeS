@@ -24,11 +24,11 @@ devtools::install_github('saezlab/PHONEMeS')
 A short tutorial on how to run a PHONEMeS analysis using PHONEMeS v2.0.0 is provided
 in the [vignette tutorial](https://github.com/saezlab/PHONEMeS/blob/master/vignettes/tutorial.Rmd).
 
-For a guide how to run a PHONEMeS analysis using PHONEMeS v1.0.0, please refer to the [documentation](https://saezlab.github.io/PHONEMeS).
 
 ### Prior versions
 
 The code for the original PHONEMeS package (PHONEMeS v1.0.0) as described in Terfve et al. 2015 can be found in the releases.
+For a guide how to run a PHONEMeS analysis using PHONEMeS v1.0.0, please refer to the [documentation](https://saezlab.github.io/PHONEMeS).
 
 
 ### References
