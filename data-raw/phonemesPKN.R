@@ -32,15 +32,19 @@ sif$target <- gsub("-", "___", sif$target)
 omnipath_ptm <- get_signed_ptms()
 omnipath_ptm <- omnipath_ptm[omnipath_ptm$modification %in% c("dephosphorylation", "phosphorylation"), ]
 
+# Filter out ProtMapper
+omnipath_ptm_filtered <- omnipath_ptm %>%
+  dplyr::filter(!(stringr::str_detect(omnipath_ptm$source, "ProtMapper") & n_resources == 1))
+
 # select target (substrate_genesymbol) and source (enzyme_genesymbol)
-KSN <- omnipath_ptm[, c(4, 3)]
+KSN <- omnipath_ptm_filtered[, c(4, 3)]
 
 # add phosphorylation site to target
-KSN$substrate_genesymbol <- paste(KSN$substrate_genesymbol, omnipath_ptm$residue_type, sep = "_")
-KSN$substrate_genesymbol <- paste(KSN$substrate_genesymbol, omnipath_ptm$residue_offset, sep = "")
+KSN$substrate_genesymbol <- paste(KSN$substrate_genesymbol, omnipath_ptm_filtered$residue_type, sep = "_")
+KSN$substrate_genesymbol <- paste(KSN$substrate_genesymbol, omnipath_ptm_filtered$residue_offset, sep = "")
 
 # set direction and likelihood of interaction
-KSN$mor <- ifelse(omnipath_ptm$modification == "phosphorylation", 1, -1)
+KSN$mor <- ifelse(omnipath_ptm_filtered$modification == "phosphorylation", 1, -1)
 KSN$likelihood <- 1
 
 # we remove ambiguous modes of regulations
@@ -53,4 +57,4 @@ names(KSN)[1:3] <- c("target", "source", "interaction")
 KSN <- KSN[c("source", "interaction", "target")]
 
 phonemesPKN <- rbind(sif, KSN)
-rm(KSN, omnipath_ptm, omnipath_sd, omniR, sif)
+rm(KSN, omnipath_ptm, omnipath_ptm_filtered, omnipath_sd, omniR, sif)

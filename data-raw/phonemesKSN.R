@@ -6,12 +6,16 @@ library(dplyr)
 omnipath_ptm <- get_signed_ptms()
 omnipath_ptm <- omnipath_ptm[omnipath_ptm$modification %in% c("dephosphorylation", "phosphorylation"), ]
 
+# Filter out ProtMapper
+omnipath_ptm_filtered <- omnipath_ptm %>%
+  dplyr::filter(!(stringr::str_detect(omnipath_ptm$source, "ProtMapper") & n_resources == 1))
+
 # select target (substrate_genesymbol) and source (enzyme_genesymbol)
-KSN <- omnipath_ptm[, c(4, 3)]
+KSN <- omnipath_ptm_filtered[, c(4, 3)]
 
 # add phosphorylation site to target
-KSN$substrate_genesymbol <- paste(KSN$substrate_genesymbol, omnipath_ptm$residue_type, sep = "_")
-KSN$substrate_genesymbol <- paste(KSN$substrate_genesymbol, omnipath_ptm$residue_offset, sep = "")
+KSN$substrate_genesymbol <- paste(KSN$substrate_genesymbol, omnipath_ptm_filtered$residue_type, sep = "_")
+KSN$substrate_genesymbol <- paste(KSN$substrate_genesymbol, omnipath_ptm_filtered$residue_offset, sep = "")
 
 # set direction and likelihood of interaction
 KSN$mor <- 1
@@ -34,4 +38,4 @@ phospho_prots$target <- gsub("_.*","",phospho_prots$source)
 
 
 phonemesKSN <- rbind(KSN, phospho_prots)
-rm(KSN, phospho_prots, omnipath_ptm)
+rm(KSN, phospho_prots, omnipath_ptm, omnipath_ptm_filtered)
