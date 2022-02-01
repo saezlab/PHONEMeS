@@ -30,7 +30,8 @@ run_phonemes <- function(inputObj,
                           solver = "cplex",
                           timelimit = 7200,
                           mipGAP = 0.05,
-                          poolrelGAP = 0){
+                          poolrelGAP = 0,
+                          dir_name = ""){
 
   netObj <- netObj %>% dplyr::filter(!(source %in% rmNodes | target %in% rmNodes))
 
@@ -71,7 +72,8 @@ run_phonemes <- function(inputObj,
                                       solver = solver,
                                       timelimit = timelimit,
                                       mipGAP = mipGAP,
-                                      poolrelGAP = poolrelGAP)
+                                      poolrelGAP = poolrelGAP,
+                                      dir_name = dir_name)
 
   # Remove nodes from Carnival results that have no up- or downAct
   resCarnival$nodesAttributes <- as.data.frame(resCarnival$nodesAttributes) %>% dplyr::mutate(dplyr::across(c(ZeroAct, UpAct, DownAct, AvgAct), as.double))
