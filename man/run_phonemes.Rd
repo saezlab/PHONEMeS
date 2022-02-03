@@ -15,7 +15,8 @@ run_phonemes(
   solver = "cplex",
   timelimit = 7200,
   mipGAP = 0.05,
-  poolrelGAP = 0
+  poolrelGAP = 0,
+  dir_name = ""
 )
 }
 \arguments{
