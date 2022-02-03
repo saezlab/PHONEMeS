@@ -1,5 +1,5 @@
 ---
-title: "tutorial"
+title: "Tutorial"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{tutorial}
@@ -15,14 +15,35 @@ knitr::opts_chunk$set(
 ```
 
 # Introduction
-This is a brief PHONEMeS tutorial. It provides an example for an analysis with 
-PHONEMeS starting from the results of an differential analysis of phosphorylation 
-sites, in this particular case a top table results object from limma.
 PHONEMeS is a method to model signaling networks based on untargeted phosphoproteomics
 mass spectrometry data and kinase/phosphatase-substrate interactions. It identifies
 a subset of interactions from a prior knowledge network that represent potential 
 regulatory signaling pathways linking known or potentially deregulated kinases to 
 downstream phorsphorylation sites.
+
+For the extraction of perturbed signaling networks using PHONEMeS, the following
+inputs are required:
+1. named vector of deregulated phosphorylation sites
+2. named vector of deregulated kinases
+3. path to a solver
+
+The potentially deregulated phosphorylation sites and kinases will then be
+connected based on a prior knowledge network. This prior knowledge network
+can either be taken from within the PHONEMeS package or manually added by the
+user. Within PHONEMeS there are two different prior knowledge networks. One is
+based on the combination of kinase-substrate interactions and protein-protein
+interactions (phonemesPKN). This network is directed and signed where phosphorylation 
+sites are always end points and not connected to their downstream protein, as the 
+effect of a phosphorylation site is often unknown. This is the default network 
+that is used in run_phonemes. The other network is solely based on kinase-substrate
+interactions and is only directed but not signed (phonemesKSN). This network was
+also used in PHONEMeS 1.0 and is the default network in run_vanilla_phonemes.
+
+Here you can find a brief PHONEMeS tutorial. It provides an example for an analysis 
+with PHONEMeS starting from the results of an differential analysis of phosphorylation 
+sites, in this particular case a top table results object from limma. This should
+allow users to prepare the input objects for PHONEMeS starting from their own
+data.
 
 # Getting set up
 First, we load the PHONEMeS library. To use PHONEMeS, in particular the run_phonemes
@@ -53,9 +74,9 @@ head(tutorialData)
 ```
 
 # Input preparation
-For the extraction of perturbed signaling networks using PHONEMeS, potentially 
-deregulated phosphorylation sites and kinases need to be selected that will be 
-connected based on a prior knowledge network. 
+This section provides a guide for the selection of deregulated phosphorylation sites
+and kinases. It also includes an example of how to estimate kinase activities using
+decoupleR which can be used for the selection of deregulated kinases.
 
 ## Selection of deregulated phosphorylation sites
 Deregulated phosphorylation sites can be selected based on their changes detected
@@ -105,7 +126,9 @@ of each interaction. Since our network is not weighted, we just add a 1 for all
 interactions.
 
 ```{r}
-decoupler_network <- phonemesKSN %>% dplyr::rename("mor" = interaction) %>% tibble::add_column("likelihood" = 1)
+decoupler_network <- phonemesPKN %>% 
+  dplyr::rename("mor" = interaction) %>% 
+  tibble::add_column("likelihood" = 1)
 ```
 
 As decoupleR functions expect a matrix as input, we are going to create a one-column
@@ -124,15 +147,21 @@ network with the input matrix. With that we filter out regulons with less than
 5 target features.
 
 ```{r}
-decoupler_network <- decoupleR::intersect_regulons(mat = decoupler_input, network = decoupler_network, 
-                                                   .source = source, .target = target, minsize = 5)
+decoupler_network <- decoupleR::intersect_regulons(mat = decoupler_input, 
+                                                   network = decoupler_network, 
+                                                   .source = source, 
+                                                   .target = target, 
+                                                   minsize = 5)
 ```
 
-Additionally, the overlapp of different regulons should be checked. If some kinases
-have the same set of targets (correlatiom = 1), we only keep one of them.
+Additionally, the overlap of different regulons should be checked. If some kinases
+have the same set of targets (correlation = 1), we only keep one of them.
 ```{r}
-correlated_regulons <- decoupleR::check_corr(decoupler_network) %>% dplyr::filter(correlation == 1)
-decoupler_network <- decoupler_network %>% dplyr::filter(!source %in% correlated_regulons$source.2)
+correlated_regulons <- decoupleR::check_corr(decoupler_network) %>% 
+  dplyr::filter(correlation == 1)
+
+decoupler_network <- decoupler_network %>% 
+  dplyr::filter(!source %in% correlated_regulons$source.2)
 ```
 
 We use mlm to estimate kinase activity but if the user would like to check other
@@ -140,17 +169,20 @@ available methods they can run show_methods(). All methods follow the same desig
 pattern and arguments.
 
 ```{r}
-kinase_activity <- decoupleR::run_mlm(mat = decoupler_input, network = decoupler_network)
+kinase_activity <- decoupleR::run_mlm(mat = decoupler_input, 
+                                      network = decoupler_network)
 ```
 
 We then choose the top 5 deregulated kinases that we will try to connect to the 
-downstream phosphorylation sites. This is again in arbitrary number and users 
+downstream phosphorylation sites. This is again an arbitrary number and users 
 should decide on a case to case basis what selection criteria to apply. Kinases 
 could also be chosen based on a chosen percentage or score cut-off.
 As before, kinases will eiter be classified as up-regulated (1) or down-regulated (-1).
 
 ```{r}
-top_kinases <- kinase_activity %>% dplyr::arrange(dplyr::desc(base::abs(score))) %>% dplyr::slice(1:5)
+top_kinases <- kinase_activity %>% 
+  dplyr::arrange(dplyr::desc(base::abs(score))) %>% 
+  dplyr::slice(1:5)
 
 deregulated_kinases <- top_kinases$score
 names(deregulated_kinases) <- top_kinases$source
@@ -165,7 +197,9 @@ are likely to not be deregulated between the conditions and with that do not exp
 the observed changes. These kinases will be filtered out from our network within PHONEMeS.
 
 ```{r}
-nc_kinases <- kinase_activity %>% dplyr::filter(base::abs(score) <= 0.5) %>% dplyr::pull(source)
+nc_kinases <- kinase_activity %>% 
+  dplyr::filter(base::abs(score) <= 0.5) %>% 
+  dplyr::pull(source)
 ```
 
 # Run PHONEMeS
@@ -185,12 +219,49 @@ phonemes_result <- PHONEMeS::run_phonemes(inputObj = deregulated_kinases,
                                           solverPath = "/Applications/CPLEX_Studio201/cplex/bin/x86-64_osx/cplex",  # Example path
                                           solver = "cplex")
 ```
-The output of PHONEMeS contains the network, measurements and inputs used for the construction and the final results, including individual solutions and one summary solution (weightedSIF, nodesAttributes). These can be directly used to identify causal interactions between the perturbed nodes and the selected kinases. In addition to extracting direct information from the network, we can run different downstream analysis based on the necessities of each project, e.g. Pathway enrichment analysis.
+The output of PHONEMeS contains the network, measurements and inputs used for the 
+construction and the final results, including individual solutions and one summary 
+solution (weightedSIF, nodesAttributes). These can be directly used to identify 
+causal interactions between the perturbed nodes and the selected kinases. 
+In addition to extracting direct information from the network, we can run different 
+downstream analysis based on the necessities of each project, e.g. Pathway enrichment analysis.
+
+## Re-attach phosphorylation sites
+After the signaling network is constructed we can connect the phosphorylation
+sites within the network to their protein if this is also part of the network.
 
 ```{r}
-utils::str(phonemes_result,max.level = 2)
+phonemes_result_pps <- PHONEMeS::reattach_psites(phonemes_result)
 ```
 
+## Save network
+The network sif and attributes file can be easily saved to a csv file.
+```{r, eval = FALSE}
+readr::write_csv(phonemes_result_pps$res$weightedSIF, "examplePath/networkSIF.csv")
+readr::write_csv(phonemes_result_pps$res$nodesAttributes, "examplePath/networkAtt.csv")
+```
+
+# Further functions
+## Get protein network
+Sometimes you might be interested in focusing on the protein interactions of the
+network and removing phosphorylation sites. This can also be helpful for the 
+visualization of the network. You can extract the protein network with the
+get_protein_network function. The output will have the same structure as the
+phonemes_result object.
+
+```{r}
+phonemes_result_protein <- get_protein_network(phonemes_result)
+```
+
+
+## Extract subnetwork
+If you want to focus on a specific protein within the network you can extract 
+n-steps up- and/or down-stream of that node.
+```{r}
+phonemes_result_sub <- PHONEMeS::extract_subnetwork(phonemes_result,
+                                                    targets = "CDK2",
+                                                    n = 1)
+```
 
 # Session Info
 This tutorial was run on the date specified below.
