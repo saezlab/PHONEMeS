@@ -1,4 +1,4 @@
-# PHONEMeS <img src="inst/figures/logo.jpeg" align="right" width="120" />
+# PHONEMeS <img src="inst/figures/logo.png" align="right" width="120" />
 
 <!-- badges: start -->
 <!-- badges: end -->
