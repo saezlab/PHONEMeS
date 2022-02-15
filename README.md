@@ -19,7 +19,6 @@ To install `PHONEMeS` please run:
 ```
 devtools::install_github('saezlab/PHONEMeS')
 ```
-
 ### Prerequisites
 
 `PHONEMeS` requires the interactive version of IBM Cplex or CBC-COIN solver as the network 
