@@ -3,7 +3,7 @@
 #' The code for this function is comparable to the orginal PHONEMeS package. An unsigned
 #' kinase-substrate network is used as prior knowledge connecting perturbed kinases with phosphosites.
 #'
-#' @param inputObj named vector of perturbation targets
+#' @param inputObj named vector of perturbation targets. Omit to run InvCARNIVAL
 #' @param measObj named vector of the measurements
 #' @param netObj data frame of the prior knowledge network
 #' @param rmNodes character vector of nodes to remove from prior knowledge network
@@ -18,7 +18,7 @@
 #' @importFrom dplyr %>%
 #' @export
 
-run_vanilla_phonemes <- function(inputObj,
+run_vanilla_phonemes <- function(inputObj = NULL,
                                  measObj,
                                  netObj = phonemesKSN,
                                  rmNodes = NULL,
@@ -37,16 +37,18 @@ run_vanilla_phonemes <- function(inputObj,
   measObj <- measObj[names(measObj) %in% netObj$target]
 
   if (pruning) {
-    # Remove nodes n_steps downstream of perturbations
-    meta_g <- igraph::graph_from_data_frame(netObj[,c("source","target",'interaction')],directed = TRUE)
-    dn_nbours <- igraph::ego(graph = meta_g, order = n_steps_pruning, nodes = names(inputObj), mode = "out")
-    sub_nodes <- c(unique(names(unlist(dn_nbours))), names(inputObj))
-    pruned_PKN <- netObj %>% dplyr::filter(source %in% sub_nodes & target %in% sub_nodes)
+    meta_g <- igraph::graph_from_data_frame(netObj[, c("source", "target", 'interaction')], directed = TRUE)
 
+    if (!is.null(inputObj)) {
+      # Remove nodes n_steps downstream of perturbations
+      dn_nbours <- igraph::ego(graph = meta_g, order = n_steps_pruning, nodes = names(inputObj), mode = "out")
+      sub_nodes <- c(unique(names(unlist(dn_nbours))), names(inputObj))
+      netObj <- netObj %>% dplyr::filter(source %in% sub_nodes & target %in% sub_nodes)
+    }
     # Remove nodes n_steps upstream of perturbations
     up_nbours <- igraph::ego(graph = meta_g, order = n_steps_pruning, nodes = names(measObj), mode = "in")
     up_nodes <- c(unique(names(unlist(up_nbours))), names(measObj))
-    netObj <- pruned_PKN %>% dplyr::filter(source %in% up_nodes & target %in% up_nodes)
+    netObj <- netObj %>% dplyr::filter(source %in% up_nodes & target %in% up_nodes)
   }
 
   # Remove input and measurements not part of the PKN (2nd pruning because some nodes have disapeared)
@@ -54,7 +56,9 @@ run_vanilla_phonemes <- function(inputObj,
   measObj <- measObj[names(measObj) %in% netObj$target] %>% abs()
 
   # Turn inputObj and measObj into data.frames for Carnival 1.3.0
-  inputObj <-  as.data.frame(t(inputObj))
+  if (!is.null(inputObj)) {
+    inputObj <- as.data.frame(t(inputObj))
+  }
   measObj <-  as.data.frame(t(measObj))
 
   message(paste("Input nodes:", length(inputObj),
