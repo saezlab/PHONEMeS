@@ -31,7 +31,7 @@ run_phonemes <- function(inputObj,
                           timelimit = 7200,
                           mipGAP = 0.05,
                           poolrelGAP = 0,
-                          dir_name = ""){
+                          dir_name = getwd()){
 
   netObj <- netObj %>% dplyr::filter(!(source %in% rmNodes | target %in% rmNodes))
 
