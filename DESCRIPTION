@@ -1,12 +1,8 @@
 Package: PHONEMeS
 Title: tool to run PHONEMeS on phosphoproteomic data
 Version: 2.0.0
-Authors@R: 
-    person(given = "Sophia",
-           family = "Müller-Dott",
-           role = c("aut", "cre"),
-           email = "sophia.mueller-dott@uni-heidelberg.de",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
+Authors: E. Gjerga, C.D.A. Terfve, A. Dugourd, L. Tobalina, S. Müller-Dott
+Maintainer: S. Müller-Dott <sophia.mueller-dott@uni-heidelberg.de>
 Description: This package runs CARNIVAL for phosphoproteomic data with a prior knowledge network 
     consisting of protein-protein and protein-phosphosite interactions form OmnipathR.
 License: GPL-3 + file LICENSE
