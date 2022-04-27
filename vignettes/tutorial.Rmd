@@ -157,11 +157,12 @@ decoupler_network <- decoupleR::intersect_regulons(mat = decoupler_input,
                                                    minsize = 5)
 ```
 
-Additionally, the overlap of different regulons should be checked. If some kinases
-have the same set of targets (correlation = 1), we only keep one of them.
+Additionally, the overlap of different regulons should be checked. We filter out kinases
+with a high overlap in their target sets (correlation >= 0.9) and only keep one of
+them as these are affected by the multi linear model used in mlm.
 ```{r}
 correlated_regulons <- decoupleR::check_corr(decoupler_network) %>% 
-  dplyr::filter(correlation == 1)
+  dplyr::filter(correlation >= 0.9)
 
 decoupler_network <- decoupler_network %>% 
   dplyr::filter(!source %in% correlated_regulons$source.2)
@@ -212,16 +213,24 @@ network is pruned by removing nodes 50 steps upstream and downstream of measurem
 and inputs. Remember that the path to an interactive version of IBM Cplex or CBC-COIN
 solver is required.
 
-This example should take about 1 minute to be solved by PHONEMeS.
+First we need to set up the options for CARNIVAL which is called within PHONEMeS. The function
+default_carnival_options returns a list with all variables in CARNIVAL based on your solver. For
+cplex and cbc you will need to specify the solverPath.
 
+```{r}
+carnival_options <- PHONEMeS::default_carnival_options(solver = "cplex")
+carnival_options$solverPath <- "/Applications/CPLEX_Studio201/cplex/bin/x86-64_osx/cplex" #Example Path
+```
+
+This example should take about 1 minute to be solved by PHONEMeS.
 ```{r, results = "hide"}
 phonemes_result <- PHONEMeS::run_phonemes(inputObj = deregulated_kinases, 
                                           measObj = deregulated_pps, 
                                           rmNodes = nc_kinases, 
                                           netObj = phonemesPKN,
-                                          solverPath = "/Applications/CPLEX_Studio201/cplex/bin/x86-64_osx/cplex",  # Example path
-                                          solver = "cplex")
+                                          carnival_options = carnival_options)
 ```
+
 The output of PHONEMeS contains the network, measurements and inputs used for the 
 construction and the final results, including individual solutions and one summary 
 solution (weightedSIF, nodesAttributes). These can be directly used to identify 

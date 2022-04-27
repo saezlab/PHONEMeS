@@ -11,27 +11,20 @@
 #' @param rmNodes character vector of nodes to remove from prior knowledge network
 #' @param pruning logic, set to TRUE if network should be pruned (recommended)
 #' @param n_steps_pruning integer giving the order of the neighborhood
-#' @param solverPath path to the solver
-#' @param solver one of the solvers available from getSupportedSolvers()
-#' @param timelimit solver time limit in seconds
-#' @param mipGAP CPLEX parameter: absolute tolerance on the gap
-#' @param poolrelGAP CPLEX/Cbc parameter: Allowed relative gap of accepted
+#' @param options An object of type \dQuote{\code{list}} defining the run parameters CARNIVAL in PHONEMeS.
+#'   Use the \code{\link{default_phonemes_options}} function to create a list with default parameter settings.
+#'   If cplex or cbc are chosen as the solver, the parameter solverPath needs to be supplied.
 #' @return List of CARNIVAL results and final inputObj, measObj, netObj used
 #' @importFrom dplyr %>%
 #' @export
 
 run_phonemes <- function(inputObj,
-                          measObj,
-                          netObj = phonemesPKN,
-                          rmNodes = NULL,
-                          pruning = TRUE,
-                          n_steps_pruning = 50,
-                          solverPath,
-                          solver = "cplex",
-                          timelimit = 7200,
-                          mipGAP = 0.05,
-                          poolrelGAP = 0,
-                          dir_name = getwd()){
+                         measObj,
+                         netObj = phonemesPKN,
+                         rmNodes = NULL,
+                         pruning = TRUE,
+                         n_steps_pruning = 50,
+                         carnival_options){
 
   netObj <- netObj %>% dplyr::filter(!(source %in% rmNodes | target %in% rmNodes))
 
@@ -56,24 +49,16 @@ run_phonemes <- function(inputObj,
   inputObj <- inputObj[names(inputObj) %in% netObj$source]
   measObj <- measObj[names(measObj) %in% netObj$target]
 
-  # Turn inputObj and measObj into data.frames for Carnival 1.3.0
-  inputObj <-  as.data.frame(t(inputObj))
-  measObj <-  as.data.frame(t(measObj))
-
   message(paste("Input nodes:", length(inputObj),
                 "\nMeasurement nodes:", length(measObj),
                 "\nNetwork nodes:", length(unique(c(netObj$source, netObj$target))),
                 "\nNetwork edges:", nrow(netObj)))
 
-  resCarnival <- CARNIVAL::runCARNIVAL(inputObj = inputObj,
-                                      measObj = measObj,
-                                      netObj = netObj,
-                                      solverPath = solverPath,
-                                      solver = solver,
-                                      timelimit = timelimit,
-                                      mipGAP = mipGAP,
-                                      poolrelGAP = poolrelGAP,
-                                      dir_name = dir_name)
+  check_carnival_options(carnival_options)
+  resCarnival <- CARNIVAL::runVanillaCarnival(perturbations = inputObj,
+                                              measurements = measObj,
+                                              priorKnowledgeNetwork = netObj,
+                                              carnivalOptions = carnival_options)
 
   # Remove nodes from Carnival results that have no up- or downAct
   resCarnival$nodesAttributes <- as.data.frame(resCarnival$nodesAttributes) %>% dplyr::mutate(dplyr::across(c(ZeroAct, UpAct, DownAct, AvgAct), as.double))

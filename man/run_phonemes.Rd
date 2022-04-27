@@ -11,12 +11,7 @@ run_phonemes(
   rmNodes = NULL,
   pruning = TRUE,
   n_steps_pruning = 50,
-  solverPath,
-  solver = "cplex",
-  timelimit = 7200,
-  mipGAP = 0.05,
-  poolrelGAP = 0,
-  dir_name = ""
+  carnival_options
 )
 }
 \arguments{
@@ -32,15 +27,9 @@ run_phonemes(
 
 \item{n_steps_pruning}{integer giving the order of the neighborhood}
 
-\item{solverPath}{path to the solver}
-
-\item{solver}{one of the solvers available from getSupportedSolvers()}
-
-\item{timelimit}{solver time limit in seconds}
-
-\item{mipGAP}{CPLEX parameter: absolute tolerance on the gap}
-
-\item{poolrelGAP}{CPLEX/Cbc parameter: Allowed relative gap of accepted}
+\item{options}{An object of type \dQuote{\code{list}} defining the run parameters CARNIVAL in PHONEMeS.
+Use the \code{\link{default_phonemes_options}} function to create a list with default parameter settings.
+If cplex or cbc are chosen as the solver, the parameter solverPath needs to be supplied.}
 }
 \value{
 List of CARNIVAL results and final inputObj, measObj, netObj used
