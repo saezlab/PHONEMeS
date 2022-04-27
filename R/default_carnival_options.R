@@ -48,6 +48,10 @@ default_carnival_options <- function(solver = NULL){
   }
   opts$keepLPFiles <- FALSE
 
+  # for older Carnival versions
+  opts$outputFolder <- getwd()
+  opts$workdir <- getwd()
+
   return(opts)
 }
 
