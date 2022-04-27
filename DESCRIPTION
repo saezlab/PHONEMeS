@@ -22,3 +22,4 @@ Suggests:
     rmarkdown,
     knitr
 VignetteBuilder: knitr
+BiocViews: CellBiology, Pathways, Network, Proteomics
