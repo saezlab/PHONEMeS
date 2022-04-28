@@ -208,23 +208,27 @@ nc_kinases <- kinase_activity %>%
 
 # Run PHONEMeS
 The deregulated phosphorylation sites and kinases can now be connected using PHONEMeS,
-in specific the run_phonemes function. Within that function the prior knowledge 
-network is pruned by removing nodes 50 steps upstream and downstream of measurements
-and inputs. Remember that the path to an interactive version of IBM Cplex or CBC-COIN
+in specific the run_phonemes function. Here you can either choose your manual kinase 
+selection (deregulated_kinases_man) or the kinases based on their activity changes
+(deregulated_kinases). For simplicity reasons we will choose the manual kinase
+selection in this example, as it will only take about 1 minute to be solved by PHONEMeS.
+In the run_phonemes function the prior knowledge network will be pruned by removing 
+nodes 50 steps upstream and downstream of measurements and inputs (default). 
+Remember that the path to an interactive version of IBM Cplex or CBC-COIN
 solver is required.
 
-First we need to set up the options for CARNIVAL which is called within PHONEMeS. The function
-default_carnival_options returns a list with all variables in CARNIVAL based on your solver. For
-cplex and cbc you will need to specify the solverPath.
+Before running PHONEMeS we need to set up the options for CARNIVAL which is called 
+within. The function default_carnival_options returns a list with all variables in 
+CARNIVAL based on your solver. For cplex and cbc you will need to specify the solverPath.
 
 ```{r}
 carnival_options <- PHONEMeS::default_carnival_options(solver = "cplex")
 carnival_options$solverPath <- "/Applications/CPLEX_Studio201/cplex/bin/x86-64_osx/cplex" #Example Path
 ```
 
-This example should take about 1 minute to be solved by PHONEMeS.
+
 ```{r, results = "hide"}
-phonemes_result <- PHONEMeS::run_phonemes(inputObj = deregulated_kinases, 
+phonemes_result <- PHONEMeS::run_phonemes(inputObj = deregulated_kinases_man, 
                                           measObj = deregulated_pps, 
                                           rmNodes = nc_kinases, 
                                           netObj = phonemesPKN,

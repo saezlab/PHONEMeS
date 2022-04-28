@@ -55,9 +55,12 @@ library(decoupleR)
 library(tidyverse)
 #> ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──
 #> ✓ ggplot2 3.3.5     ✓ purrr   0.3.4
-#> ✓ tibble  3.1.6     ✓ dplyr   1.0.7
-#> ✓ tidyr   1.1.4     ✓ stringr 1.4.0
-#> ✓ readr   2.1.1     ✓ forcats 0.5.1
+#> ✓ tibble  3.1.6     ✓ dplyr   1.0.8
+#> ✓ tidyr   1.2.0     ✓ stringr 1.4.0
+#> ✓ readr   2.1.2     ✓ forcats 0.5.1
+#> Warning: package 'tidyr' was built under R version 4.1.2
+#> Warning: package 'readr' was built under R version 4.1.2
+#> Warning: package 'dplyr' was built under R version 4.1.2
 #> ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 #> x dplyr::filter() masks stats::filter()
 #> x dplyr::lag()    masks stats::lag()
@@ -166,13 +169,14 @@ decoupler_network <- decoupleR::intersect_regulons(mat = decoupler_input,
                                                    minsize = 5)
 ```
 
-Additionally, the overlap of different regulons should be checked. If
-some kinases have the same set of targets (correlation = 1), we only
-keep one of them.
+Additionally, the overlap of different regulons should be checked. We
+filter out kinases with a high overlap in their target sets (correlation
+\>= 0.9) and only keep one of them as these are affected by the multi
+linear model used in mlm.
 
 ``` r
 correlated_regulons <- decoupleR::check_corr(decoupler_network) %>% 
-  dplyr::filter(correlation == 1)
+  dplyr::filter(correlation >= 0.9)
 
 decoupler_network <- decoupler_network %>% 
   dplyr::filter(!source %in% correlated_regulons$source.2)
@@ -221,31 +225,60 @@ nc_kinases <- kinase_activity %>%
 # Run PHONEMeS
 
 The deregulated phosphorylation sites and kinases can now be connected
-using PHONEMeS, in specific the run_phonemes function. Within that
-function the prior knowledge network is pruned by removing nodes 50
-steps upstream and downstream of measurements and inputs. Remember that
-the path to an interactive version of IBM Cplex or CBC-COIN solver is
-required.
+using PHONEMeS, in specific the run_phonemes function. Here you can
+either choose your manual kinase selection (deregulated_kinases_man) or
+the kinases based on their activity changes (deregulated_kinases). For
+simplicity reasons we will choose the manual kinase selection in this
+example, as it will only take about 1 minute to be solved by PHONEMeS.
+In the run_phonemes function the prior knowledge network will be pruned
+by removing nodes 50 steps upstream and downstream of measurements and
+inputs (default). Remember that the path to an interactive version of
+IBM Cplex or CBC-COIN solver is required.
 
-This example should take about 1 minute to be solved by PHONEMeS.
+Before running PHONEMeS we need to set up the options for CARNIVAL which
+is called within. The function default_carnival_options returns a list
+with all variables in CARNIVAL based on your solver. For cplex and cbc
+you will need to specify the solverPath.
 
 ``` r
-phonemes_result <- PHONEMeS::run_phonemes(inputObj = deregulated_kinases, 
+carnival_options <- PHONEMeS::default_carnival_options(solver = "cplex")
+carnival_options$solverPath <- "/Applications/CPLEX_Studio201/cplex/bin/x86-64_osx/cplex" #Example Path
+```
+
+``` r
+phonemes_result <- PHONEMeS::run_phonemes(inputObj = deregulated_kinases_man, 
                                           measObj = deregulated_pps, 
                                           rmNodes = nc_kinases, 
                                           netObj = phonemesPKN,
-                                          solverPath = "/Applications/CPLEX_Studio201/cplex/bin/x86-64_osx/cplex",  # Example path
-                                          solver = "cplex")
-#> Input nodes: 5 
+                                          carnival_options = carnival_options)
+#> Input nodes: 1 
 #> Measurement nodes: 10 
-#> Network nodes: 1500 
-#> Network edges: 8758
-#> Writing constraints...
-#> Solving LP problem...
+#> Network nodes: 1537 
+#> Network edges: 9289
+#> --- Start of the CARNIVAL pipeline ---
+#> 10:20:01 28.04.2022 Carnival flavour: vanilla
+#> 10:20:01 28.04.2022 Generating variables for lp problem
+#> 10:20:01 28.04.2022 Done: generating variables for lp problem
+#> Saving preprocessed data.
+#> Done: saving parsed data: /Users/smuellerdott/Documents/PHONEMeS/vignettes//parsedData_t10_20_01d28_04_2022n86.RData
+#> 10:20:01 28.04.2022 Generating formulation for LP problem
+#> 10:20:03 28.04.2022 Done: generating formulation for LP problem.
+#> Saving LP file
+#> Done: Saving LP file: /Users/smuellerdott/Documents/PHONEMeS/vignettes//lpFile_t10_20_01d28_04_2022n86.lp
+#> 10:20:03 28.04.2022 Solving LP problem
+#> Writing cplex command file
+#> Done: writing cplex command file
 #> Saving results...
+#> 10:20:49 28.04.2022 Done: solving LP problem.
+#> 10:20:49 28.04.2022 Getting the solution matrix
+#> 10:20:50 28.04.2022 Done: getting the solution matrix.
+#> 10:20:50 28.04.2022 Exporting solution matrix
+#> 10:20:50 28.04.2022 Done: exporting solution matrix.
+#> Cleaning intermediate files
+#> Done: cleaning
+#> 10:20:50 28.04.2022 All tasks finished.
 #> 
 #> --- End of the CARNIVAL pipeline ---
-#> 
 ```
 
 The output of PHONEMeS contains the network, measurements and inputs
@@ -308,7 +341,7 @@ This tutorial was run on the date specified below.
 
 ``` r
 Sys.Date()
-#> [1] "2022-02-03"
+#> [1] "2022-04-28"
 ```
 
 The sessionInfo() at run time was:
@@ -330,45 +363,25 @@ sessionInfo()
 #> [1] stats     graphics  grDevices utils     datasets  methods   base     
 #> 
 #> other attached packages:
-#>  [1] forcats_0.5.1   stringr_1.4.0   dplyr_1.0.7     purrr_0.3.4    
-#>  [5] readr_2.1.1     tidyr_1.1.4     tibble_3.1.6    ggplot2_3.3.5  
-#>  [9] tidyverse_1.3.1 decoupleR_2.1.5 PHONEMeS_2.0.0 
+#>  [1] forcats_0.5.1   stringr_1.4.0   dplyr_1.0.8     purrr_0.3.4    
+#>  [5] readr_2.1.2     tidyr_1.2.0     tibble_3.1.6    ggplot2_3.3.5  
+#>  [9] tidyverse_1.3.1 decoupleR_2.1.8 PHONEMeS_2.0.0 
 #> 
 #> loaded via a namespace (and not attached):
-#>   [1] colorspace_2.0-2       ellipsis_0.3.2         class_7.3-20          
-#>   [4] XVector_0.34.0         fs_1.5.2               rstudioapi_0.13       
-#>   [7] proxy_0.4-26           bit64_4.0.5            AnnotationDbi_1.56.2  
-#>  [10] fansi_1.0.2            lubridate_1.8.0        xml2_1.3.3            
-#>  [13] RobustRankAggreg_1.1   codetools_0.2-18       splines_4.1.0         
-#>  [16] doParallel_1.0.16      cachem_1.0.6           knitr_1.37            
-#>  [19] jsonlite_1.7.3         broom_0.7.11           annotate_1.72.0       
-#>  [22] kernlab_0.9-29         dbplyr_2.1.1           png_0.1-7             
-#>  [25] graph_1.72.0           compiler_4.1.0         httr_1.4.2            
-#>  [28] backports_1.4.1        assertthat_0.2.1       Matrix_1.4-0          
-#>  [31] fastmap_1.1.0          cli_3.1.1              htmltools_0.5.2       
-#>  [34] tools_4.1.0            igraph_1.2.11          gtable_0.3.0          
-#>  [37] glue_1.6.1             GenomeInfoDbData_1.2.7 Category_2.60.0       
-#>  [40] rappdirs_0.3.3         Rcpp_1.0.8             Biobase_2.54.0        
-#>  [43] cellranger_1.1.0       vctrs_0.3.8            Biostrings_2.62.0     
-#>  [46] iterators_1.0.13       xfun_0.29              rvest_1.0.2           
-#>  [49] lpSolve_5.6.15         lifecycle_1.0.1        XML_3.99-0.8          
-#>  [52] MASS_7.3-55            zlibbioc_1.40.0        scales_1.1.1          
-#>  [55] hms_1.1.1              RBGL_1.70.0            parallel_4.1.0        
-#>  [58] curl_4.3.2             yaml_2.2.1             memoise_2.0.1         
-#>  [61] viper_1.28.0           segmented_1.4-0        stringi_1.7.6         
-#>  [64] RSQLite_2.2.9          genefilter_1.76.0      S4Vectors_0.32.3      
-#>  [67] foreach_1.5.1          e1071_1.7-9            filelock_1.0.2        
-#>  [70] BiocGenerics_0.40.0    GenomeInfoDb_1.30.0    rlang_1.0.0           
-#>  [73] pkgconfig_2.0.3        bitops_1.0-7           CARNIVAL_1.3.0        
-#>  [76] evaluate_0.14          lattice_0.20-45        bit_4.0.4             
-#>  [79] tidyselect_1.1.1       GSEABase_1.56.0        magrittr_2.0.2        
-#>  [82] R6_2.5.1               UniProt.ws_2.34.0      IRanges_2.28.0        
-#>  [85] generics_0.1.1         DBI_1.1.2              pillar_1.6.5          
-#>  [88] haven_2.4.3            withr_2.4.3            mixtools_1.2.0        
-#>  [91] survival_3.2-13        KEGGREST_1.34.0        RCurl_1.98-1.5        
-#>  [94] modelr_0.1.8           crayon_1.4.2           KernSmooth_2.23-20    
-#>  [97] utf8_1.2.2             BiocFileCache_2.2.1    tzdb_0.2.0            
-#> [100] rmarkdown_2.11         grid_4.1.0             readxl_1.3.1          
-#> [103] blob_1.2.2             reprex_2.0.1           digest_0.6.29         
-#> [106] xtable_1.8-4           stats4_4.1.0           munsell_0.5.0
+#>  [1] lubridate_1.8.0  lattice_0.20-45  assertthat_0.2.1 digest_0.6.29   
+#>  [5] utf8_1.2.2       R6_2.5.1         cellranger_1.1.0 backports_1.4.1 
+#>  [9] reprex_2.0.1     evaluate_0.15    httr_1.4.2       pillar_1.7.0    
+#> [13] rlang_1.0.2      readxl_1.4.0     rstudioapi_0.13  Matrix_1.4-1    
+#> [17] rmarkdown_2.14   bit_4.0.4        igraph_1.3.1     munsell_0.5.0   
+#> [21] broom_0.8.0      compiler_4.1.0   modelr_0.1.8     xfun_0.30       
+#> [25] pkgconfig_2.0.3  CARNIVAL_2.5.1   htmltools_0.5.2  tidyselect_1.1.2
+#> [29] lpSolve_5.6.15   fansi_1.0.3      crayon_1.5.1     tzdb_0.3.0      
+#> [33] dbplyr_2.1.1     withr_2.5.0      grid_4.1.0       jsonlite_1.8.0  
+#> [37] gtable_0.3.0     lifecycle_1.0.1  DBI_1.1.2        magrittr_2.0.3  
+#> [41] scales_1.2.0     cli_3.2.0        stringi_1.7.6    vroom_1.5.7     
+#> [45] fs_1.5.2         xml2_1.3.3       ellipsis_0.3.2   generics_0.1.2  
+#> [49] vctrs_0.4.1      rjson_0.2.21     tools_4.1.0      bit64_4.0.5     
+#> [53] glue_1.6.2       hms_1.1.1        parallel_4.1.0   fastmap_1.1.0   
+#> [57] yaml_2.3.5       colorspace_2.0-3 rvest_1.0.2      knitr_1.39      
+#> [61] haven_2.5.0
 ```
