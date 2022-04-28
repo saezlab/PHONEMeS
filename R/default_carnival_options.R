@@ -69,7 +69,8 @@ default_carnival_options <- function(solver = NULL){
 #'
 #' @seealso \code{\link{default_carnival_options}},
 #'   \code{\link[PHONEMeS]{run_phonemes}}
-#' @noRd
+#' @export
+
 check_carnival_options <- function(opts){
 
 

@@ -60,17 +60,6 @@ run_phonemes <- function(inputObj,
                                               priorKnowledgeNetwork = netObj,
                                               carnivalOptions = carnival_options)
 
-  # Remove nodes from Carnival results that have no up- or downAct
-  resCarnival$nodesAttributes <- as.data.frame(resCarnival$nodesAttributes) %>% dplyr::mutate(dplyr::across(c(ZeroAct, UpAct, DownAct, AvgAct), as.double))
-  zeroNodes <- resCarnival$nodesAttributes %>% dplyr::filter(UpAct == 0 & DownAct == 0) %>% dplyr::pull(Node)
-
-  resCarnival$nodesAttributes <- resCarnival$nodesAttributes %>% dplyr::filter(!Node %in% zeroNodes)
-  rm(zeroNodes)
-
-  resCarnival$weightedSIF <- as.data.frame(resCarnival$weightedSIF) %>%
-    dplyr::mutate(dplyr::across(Weight, as.double)) %>%
-    dplyr::filter(Node1 %in% resCarnival$nodesAttributes$Node & Node2 %in% resCarnival$nodesAttributes$Node)
-
   # Add degree to attributes
   in_degree <- resCarnival$weightedSIF %>% dplyr::group_by(Node2) %>%
     dplyr::summarise(in_degree  = dplyr::n()) %>%
@@ -105,7 +94,7 @@ run_phonemes <- function(inputObj,
 #'
 reattach_psites <- function(phonemes_res)
 {
-  sif <- phonemes_res$res$weightedSIF
+  sif <- phonemes_result$res$weightedSIF
   att <- phonemes_res$res$nodesAttributes
 
   phospho_prots <- data.frame(sif[grepl("_",sif$Node2),3])
