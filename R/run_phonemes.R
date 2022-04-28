@@ -60,6 +60,10 @@ run_phonemes <- function(inputObj,
                                               priorKnowledgeNetwork = netObj,
                                               carnivalOptions = carnival_options)
 
+  # Remove nodes with 0 weight
+  resCarnival$weightedSIF <- resCarnival$weightedSIF %>% filter(Weight != 0)
+  resCarnival$nodesAttributes <- resCarnival$nodesAttributes %>% filter(Node %in% union(resCarnival$weightedSIF$Node1, resCarnival$weightedSIF$Node2))
+
   # Add degree to attributes
   in_degree <- resCarnival$weightedSIF %>% dplyr::group_by(Node2) %>%
     dplyr::summarise(in_degree  = dplyr::n()) %>%
