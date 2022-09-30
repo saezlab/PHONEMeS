@@ -38,4 +38,5 @@ phospho_prots$target <- gsub("_.*","",phospho_prots$source)
 
 
 phonemesKSN <- rbind(KSN, phospho_prots)
+phonemesKSN <- phonemesKSN[!duplicated(phonemesKSN),]
 rm(KSN, phospho_prots, omnipath_ptm, omnipath_ptm_filtered)
