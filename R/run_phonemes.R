@@ -98,7 +98,7 @@ run_phonemes <- function(inputObj,
 #'
 reattach_psites <- function(phonemes_res)
 {
-  sif <- phonemes_result$res$weightedSIF
+  sif <- phonemes_res$res$weightedSIF
   att <- phonemes_res$res$nodesAttributes
 
   phospho_prots <- data.frame(sif[grepl("_",sif$Node2),3])
