@@ -59,8 +59,8 @@ run_vanilla_phonemes <- function(inputObj,
                                               carnivalOptions = carnival_options)
 
   # Remove nodes with 0 weight
-  resCarnival$weightedSIF <- resCarnival$weightedSIF %>% filter(Weight != 0)
-  resCarnival$nodesAttributes <- resCarnival$nodesAttributes %>% filter(Node %in% union(resCarnival$weightedSIF$Node1, resCarnival$weightedSIF$Node2))
+  resCarnival$weightedSIF <- resCarnival$weightedSIF %>% dplyr::filter(Weight != 0)
+  resCarnival$nodesAttributes <- resCarnival$nodesAttributes %>% dplyr::filter(Node %in% union(resCarnival$weightedSIF$Node1, resCarnival$weightedSIF$Node2))
 
   # Add degree to attributes
   in_degree <- resCarnival$weightedSIF %>% dplyr::group_by(Node2) %>%
