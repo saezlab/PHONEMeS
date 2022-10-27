@@ -53,17 +53,22 @@ statistical approaches to perform functional analysis of omics data.
 library(PHONEMeS)
 library(decoupleR)
 library(tidyverse)
-#> ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──
-#> ✓ ggplot2 3.3.5     ✓ purrr   0.3.4
-#> ✓ tibble  3.1.6     ✓ dplyr   1.0.8
-#> ✓ tidyr   1.2.0     ✓ stringr 1.4.0
-#> ✓ readr   2.1.2     ✓ forcats 0.5.1
+#> Warning: package 'tidyverse' was built under R version 4.1.2
+#> ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.2 ──
+#> ✔ ggplot2 3.3.6      ✔ purrr   0.3.5 
+#> ✔ tibble  3.1.8      ✔ dplyr   1.0.10
+#> ✔ tidyr   1.2.1      ✔ stringr 1.4.1 
+#> ✔ readr   2.1.3      ✔ forcats 0.5.2
+#> Warning: package 'ggplot2' was built under R version 4.1.2
+#> Warning: package 'tibble' was built under R version 4.1.2
 #> Warning: package 'tidyr' was built under R version 4.1.2
 #> Warning: package 'readr' was built under R version 4.1.2
+#> Warning: package 'purrr' was built under R version 4.1.2
 #> Warning: package 'dplyr' was built under R version 4.1.2
+#> Warning: package 'forcats' was built under R version 4.1.2
 #> ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-#> x dplyr::filter() masks stats::filter()
-#> x dplyr::lag()    masks stats::lag()
+#> ✖ dplyr::filter() masks stats::filter()
+#> ✖ dplyr::lag()    masks stats::lag()
 ```
 
 We then take a look at the tutorialData inside PHONEMeS. It consists of
@@ -256,27 +261,27 @@ phonemes_result <- PHONEMeS::run_phonemes(inputObj = deregulated_kinases_man,
 #> Network nodes: 1537 
 #> Network edges: 9289
 #> --- Start of the CARNIVAL pipeline ---
-#> 10:20:01 28.04.2022 Carnival flavour: vanilla
-#> 10:20:01 28.04.2022 Generating variables for lp problem
-#> 10:20:01 28.04.2022 Done: generating variables for lp problem
+#> 10:48:20 27.10.2022 Carnival flavour: vanilla
+#> 10:48:20 27.10.2022 Generating variables for lp problem
+#> 10:48:20 27.10.2022 Done: generating variables for lp problem
 #> Saving preprocessed data.
-#> Done: saving parsed data: /Users/smuellerdott/Documents/PHONEMeS/vignettes//parsedData_t10_20_01d28_04_2022n86.RData
-#> 10:20:01 28.04.2022 Generating formulation for LP problem
-#> 10:20:03 28.04.2022 Done: generating formulation for LP problem.
+#> Done: saving parsed data: /Users/smuellerdott/Documents/PHONEMeS/vignettes//parsedData_t10_48_20d27_10_2022n47.RData
+#> 10:48:20 27.10.2022 Generating formulation for LP problem
+#> 10:48:21 27.10.2022 Done: generating formulation for LP problem.
 #> Saving LP file
-#> Done: Saving LP file: /Users/smuellerdott/Documents/PHONEMeS/vignettes//lpFile_t10_20_01d28_04_2022n86.lp
-#> 10:20:03 28.04.2022 Solving LP problem
+#> Done: Saving LP file: /Users/smuellerdott/Documents/PHONEMeS/vignettes//lpFile_t10_48_20d27_10_2022n47.lp
+#> 10:48:22 27.10.2022 Solving LP problem
 #> Writing cplex command file
 #> Done: writing cplex command file
 #> Saving results...
-#> 10:20:49 28.04.2022 Done: solving LP problem.
-#> 10:20:49 28.04.2022 Getting the solution matrix
-#> 10:20:50 28.04.2022 Done: getting the solution matrix.
-#> 10:20:50 28.04.2022 Exporting solution matrix
-#> 10:20:50 28.04.2022 Done: exporting solution matrix.
+#> 10:49:29 27.10.2022 Done: solving LP problem.
+#> 10:49:29 27.10.2022 Getting the solution matrix
+#> 10:49:29 27.10.2022 Done: getting the solution matrix.
+#> 10:49:29 27.10.2022 Exporting solution matrix
+#> 10:49:30 27.10.2022 Done: exporting solution matrix.
 #> Cleaning intermediate files
 #> Done: cleaning
-#> 10:20:50 28.04.2022 All tasks finished.
+#> 10:49:30 27.10.2022 All tasks finished.
 #> 
 #> --- End of the CARNIVAL pipeline ---
 ```
@@ -298,7 +303,6 @@ also part of the network.
 
 ``` r
 phonemes_result_pps <- PHONEMeS::reattach_psites(phonemes_result)
-#> [1] "No psites to attach"
 ```
 
 ## Save network
@@ -341,7 +345,7 @@ This tutorial was run on the date specified below.
 
 ``` r
 Sys.Date()
-#> [1] "2022-04-28"
+#> [1] "2022-10-27"
 ```
 
 The sessionInfo() at run time was:
@@ -363,25 +367,30 @@ sessionInfo()
 #> [1] stats     graphics  grDevices utils     datasets  methods   base     
 #> 
 #> other attached packages:
-#>  [1] forcats_0.5.1   stringr_1.4.0   dplyr_1.0.8     purrr_0.3.4    
-#>  [5] readr_2.1.2     tidyr_1.2.0     tibble_3.1.6    ggplot2_3.3.5  
-#>  [9] tidyverse_1.3.1 decoupleR_2.1.8 PHONEMeS_2.0.0 
+#>  [1] forcats_0.5.2   stringr_1.4.1   dplyr_1.0.10    purrr_0.3.5    
+#>  [5] readr_2.1.3     tidyr_1.2.1     tibble_3.1.8    ggplot2_3.3.6  
+#>  [9] tidyverse_1.3.2 decoupleR_2.3.2 PHONEMeS_2.0.1 
 #> 
 #> loaded via a namespace (and not attached):
-#>  [1] lubridate_1.8.0  lattice_0.20-45  assertthat_0.2.1 digest_0.6.29   
-#>  [5] utf8_1.2.2       R6_2.5.1         cellranger_1.1.0 backports_1.4.1 
-#>  [9] reprex_2.0.1     evaluate_0.15    httr_1.4.2       pillar_1.7.0    
-#> [13] rlang_1.0.2      readxl_1.4.0     rstudioapi_0.13  Matrix_1.4-1    
-#> [17] rmarkdown_2.14   bit_4.0.4        igraph_1.3.1     munsell_0.5.0   
-#> [21] broom_0.8.0      compiler_4.1.0   modelr_0.1.8     xfun_0.30       
-#> [25] pkgconfig_2.0.3  CARNIVAL_2.5.1   htmltools_0.5.2  tidyselect_1.1.2
-#> [29] lpSolve_5.6.15   fansi_1.0.3      crayon_1.5.1     tzdb_0.3.0      
-#> [33] dbplyr_2.1.1     withr_2.5.0      grid_4.1.0       jsonlite_1.8.0  
-#> [37] gtable_0.3.0     lifecycle_1.0.1  DBI_1.1.2        magrittr_2.0.3  
-#> [41] scales_1.2.0     cli_3.2.0        stringi_1.7.6    vroom_1.5.7     
-#> [45] fs_1.5.2         xml2_1.3.3       ellipsis_0.3.2   generics_0.1.2  
-#> [49] vctrs_0.4.1      rjson_0.2.21     tools_4.1.0      bit64_4.0.5     
-#> [53] glue_1.6.2       hms_1.1.1        parallel_4.1.0   fastmap_1.1.0   
-#> [57] yaml_2.3.5       colorspace_2.0-3 rvest_1.0.2      knitr_1.39      
-#> [61] haven_2.5.0
+#>  [1] lubridate_1.8.0     lattice_0.20-45     assertthat_0.2.1   
+#>  [4] digest_0.6.30       utf8_1.2.2          R6_2.5.1           
+#>  [7] cellranger_1.1.0    backports_1.4.1     reprex_2.0.2       
+#> [10] evaluate_0.17       httr_1.4.4          pillar_1.8.1       
+#> [13] rlang_1.0.6         googlesheets4_1.0.1 readxl_1.4.1       
+#> [16] rstudioapi_0.14     Matrix_1.4-1        rmarkdown_2.17     
+#> [19] googledrive_2.0.0   bit_4.0.4           igraph_1.3.5       
+#> [22] munsell_0.5.0       broom_1.0.0         compiler_4.1.0     
+#> [25] modelr_0.1.9        xfun_0.34           pkgconfig_2.0.3    
+#> [28] CARNIVAL_2.4.0      htmltools_0.5.3     tidyselect_1.2.0   
+#> [31] lpSolve_5.6.17      fansi_1.0.3         crayon_1.5.2       
+#> [34] tzdb_0.3.0          dbplyr_2.2.1        withr_2.5.0        
+#> [37] grid_4.1.0          jsonlite_1.8.3      gtable_0.3.0       
+#> [40] lifecycle_1.0.3     DBI_1.1.3           magrittr_2.0.3     
+#> [43] scales_1.2.1        vroom_1.6.0         cli_3.4.1          
+#> [46] stringi_1.7.8       fs_1.5.2            xml2_1.3.3         
+#> [49] ellipsis_0.3.2      generics_0.1.3      vctrs_0.5.0        
+#> [52] tools_4.1.0         bit64_4.0.5         glue_1.6.2         
+#> [55] hms_1.1.2           parallel_4.1.0      fastmap_1.1.0      
+#> [58] yaml_2.3.6          colorspace_2.0-3    gargle_1.2.0       
+#> [61] rvest_1.0.3         knitr_1.40          haven_2.5.1
 ```
