@@ -254,7 +254,7 @@ carnival_options$solverPath <- "/Applications/CPLEX_Studio201/cplex/bin/x86-64_o
 ``` r
 #deregulated_kinases_man: this is a named numeric vector
 #deregulated_pps: this is a named numeric vector
-#nc_kinases: this is a named numeric vector
+#nc_kinases: this is a character vector
 
 phonemes_result <- PHONEMeS::run_phonemes(inputObj = deregulated_kinases_man, 
                                           measObj = deregulated_pps, 
