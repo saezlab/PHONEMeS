@@ -222,6 +222,7 @@ conditions and with that do not explain the observed changes. These
 kinases will be filtered out from our network within PHONEMeS.
 
 ``` r
+#this extract the NAMES of the kinases -> this is a vector of names
 nc_kinases <- kinase_activity %>% 
   dplyr::filter(base::abs(score) <= 0.5) %>% 
   dplyr::pull(source)
@@ -251,6 +252,10 @@ carnival_options$solverPath <- "/Applications/CPLEX_Studio201/cplex/bin/x86-64_o
 ```
 
 ``` r
+#deregulated_kinases_man: this is a named numeric vector
+#deregulated_pps: this is a named numeric vector
+#nc_kinases: this is a named numeric vector
+
 phonemes_result <- PHONEMeS::run_phonemes(inputObj = deregulated_kinases_man, 
                                           measObj = deregulated_pps, 
                                           rmNodes = nc_kinases, 
