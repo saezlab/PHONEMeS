@@ -21,6 +21,7 @@ For more information about this package, please check the following links:
 
 To install `PHONEMeS` please run:
 ```
+install.packages('devtools') # in case devtools hasn't been installed
 devtools::install_github('saezlab/PHONEMeS')
 ```
 ### Prerequisites
