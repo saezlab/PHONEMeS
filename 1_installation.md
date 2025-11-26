@@ -3,8 +3,8 @@ layout: page
 title: Installation
 ---
 
-# PHONEMeS-ILP
-For the installation of the most recent ILP implementation of PHONEMeS the user can do this directly from GitHub by using the [devtools](https://www.r-project.org/nosvn/pandoc/devtools.html) package:
+# PHONEMeS
+For the installation of the most recent implementation of PHONEMeS the user can do this directly from GitHub by using the [devtools](https://www.r-project.org/nosvn/pandoc/devtools.html) package:
 
 ```R
 # Install PHONEMeS from Github using devtools
